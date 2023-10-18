@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 type Props = {};
 
@@ -21,7 +22,9 @@ const Navbar = (props: Props) => {
                 <li>Contact</li>
             </ul>
             <div className="flex space-x-4">
-                <Button>Login</Button>
+                <Link href="/api/auth/signout">
+                    <Button>Sign Out</Button>
+                </Link>
             </div>
         </header>
     );
