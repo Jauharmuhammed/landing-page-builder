@@ -34,16 +34,6 @@ export default {
                 },
             ],
         },
-        header: {
-            heading: "Transform Visitors into Customers with Our Landing Page Builder",
-            description:
-                "Experience the power to transform casual visitors into devoted customers with our intuitive Landing Page Builder. Create high-converting landing pages that boost your online success.",
-            image: "/images/hero-image3.jpeg",
-            ctaButton: {
-                label: "Get Started",
-                link: "/get-started",
-            },
-        },
         services: {
             header: {
                 title: "Your Landing Page Builder",
@@ -73,6 +63,91 @@ export default {
                 },
             ],
         },
+        header: {
+            heading: "Transform Visitors into Customers with Our Landing Page Builder",
+            description:
+                "Experience the power to transform casual visitors into devoted customers with our intuitive Landing Page Builder. Create high-converting landing pages that boost your online success.",
+            image: "/images/hero-image3.jpeg",
+            ctaButton: {
+                label: "Get Started",
+                link: "/get-started",
+            },
+        },
+        sections: [
+            {
+                type: "productFeatures",
+                content: {
+                    features: [
+                        {
+                            icon: "feature-icon-1.png",
+                            title: "Easy to Use",
+                            description: "No coding required. Our builder is user-friendly.",
+                        },
+                        {
+                            icon: "feature-icon-2.png",
+                            title: "Customization",
+                            description: "Tailor landing pages to your brand's unique style.",
+                        },
+                        {
+                            icon: "feature-icon-3.png",
+                            title: "Conversion Optimization",
+                            description: "Boost your conversions with our tools.",
+                        },
+                    ],
+                },
+            },
+            {
+                type: "plans",
+                content: {
+                    plans: [
+                        {
+                            name: "Starter Plan",
+                            price: "$19/month",
+                            description: "Ideal for small businesses.",
+                            ctaButton: {
+                                text: "Choose Plan",
+                                link: "/choose-starter-plan",
+                            },
+                        },
+                        {
+                            name: "Pro Plan",
+                            price: "$49/month",
+                            description: "For growing businesses and marketers.",
+                            ctaButton: {
+                                text: "Choose Plan",
+                                link: "/choose-pro-plan",
+                            },
+                        },
+                    ],
+                },
+            },
+            {
+                type: "contact",
+                content: {
+                    heading: "Contact Us",
+                    description: "Have questions? Contact our support team.",
+                    ctaButton: {
+                        text: "Contact Support",
+                        link: "/contact-support",
+                    },
+                },
+            },
+            {
+                type: "socialProof",
+                content: {
+                    quotes: [
+                        {
+                            text: "Our landing page saw a 30% increase in conversions thanks to this builder.",
+                            author: "John Doe, CEO",
+                        },
+                        {
+                            text: "The best landing page builder I've ever used.",
+                            author: "Jane Smith, Marketer",
+                        },
+                    ],
+                },
+            },
+        ],
         footer: {
             logo: {
                 src: "/images/landerr.svg",

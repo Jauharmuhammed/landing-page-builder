@@ -35,7 +35,7 @@ const Services = ({ elements }: Props) => {
                     <div
                         key={element.title}
                         className="relative rounded-3xl flex-1 w-full aspect-square overflow-hidden flex">
-                        <div className="flex space-x-6 items-center w-full self-end m-2 rounded-3xl p-4 bg-white">
+                        <div className="flex space-x-6 items-center w-full self-end m-2 rounded-2xl p-4 bg-white">
                             <div className="flex flex-col">
                                 <h3 className={cn("text-xl uppercase", plusJakartaSans.className)}>
                                     {element.title}
