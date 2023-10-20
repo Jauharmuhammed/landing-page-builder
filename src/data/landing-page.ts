@@ -42,6 +42,7 @@ export default {
             ctaButton: {
                 label: "Get Started",
                 link: "/get-started",
+                varient: "default",
             },
         },
         services: {
