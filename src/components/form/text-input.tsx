@@ -31,7 +31,6 @@ const TextInput = ({ form, fieldname, label, placeholder, description, onChange 
                             {...field}
                             onChange={(e) => {
                                 field.onChange(e);
-                                console.log(e.target.value);
                                 onChange(e.target.value);
                             }}
                             placeholder={placeholder}

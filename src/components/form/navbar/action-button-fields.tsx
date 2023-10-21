@@ -1,20 +1,28 @@
 import React from "react";
+
+import * as z from "zod";
+
 import TextInput from "../text-input";
 import { useSelector, useDispatch } from "react-redux";
 import { updateNavbarActionLabel } from "@/store/layoutSlice";
 
+import { UseFormReturn } from "react-hook-form";
+import { layoutReducer } from "../../../../types";
+import { formSchema } from "@/app/project/new/constants";
+
 type Props = {
-    form: any;
-    field: string;
+    form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
 };
 
-const ActionButtonInput = ({ form, field }: Props) => {
+const ActionButtonFields = ({ form }: Props) => {
+    const navbar = useSelector((state: layoutReducer) => state.layout.elements.navbar);
     const dispatch = useDispatch();
+    form.setValue("navbarLabel", navbar.actions[0].label);
     return (
         <>
             <TextInput
                 form={form}
-                fieldname={field}
+                fieldname="navbarLabel"
                 onChange={(value) => dispatch(updateNavbarActionLabel(value))}
                 label="Action button label"
                 placeholder="Sing in"
@@ -24,4 +32,4 @@ const ActionButtonInput = ({ form, field }: Props) => {
     );
 };
 
-export default ActionButtonInput;
+export default ActionButtonFields;

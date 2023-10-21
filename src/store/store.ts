@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import layoutReducer from "./layoutSlice";
+import imageReducer from "./imageSlice";
 // ...
 
 export const store = configureStore({
     reducer: {
-        layout: layoutReducer
+        layout: layoutReducer,
+        image: imageReducer,
     },
 });
 
