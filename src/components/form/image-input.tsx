@@ -47,7 +47,7 @@ const ImageInput = ({ form, fieldname, label, placeholder, description, onChange
                                     const content = file ? URL.createObjectURL(file) : "";
                                     dispatch(
                                         setImagePreview({
-                                            content: content,
+                                            content: file,
                                             key: fieldname,
                                             filename: file?.name,
                                         })
@@ -66,7 +66,7 @@ const ImageInput = ({ form, fieldname, label, placeholder, description, onChange
                         width={100}
                         height={100}
                         className="my-auto h-full max-h-20"
-                        src={imagePreview}
+                        src={URL.createObjectURL(imagePreview)}
                         alt="preview"
                     />
                 </div>

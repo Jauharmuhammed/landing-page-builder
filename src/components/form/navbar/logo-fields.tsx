@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateNavbarActionLabel } from "@/store/layoutSlice";
 
 import { UseFormReturn } from "react-hook-form";
-import { layoutReducer } from "../../../../types";
-import { formSchema } from "@/app/project/new/constants";
+import { layoutReducer } from "../../../types/types";
+import { formSchema } from "@/app/project/edit/[id]/constants";
 import ImageInput from "../image-input";
 
 type Props = {

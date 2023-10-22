@@ -7,7 +7,7 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { formSchema } from "@/app/project/new/constants";
+import { formSchema } from "@/app/project/edit/[id]/constants";
 import ActionButtonInput from "./navbar/action-button-fields";
 
 export default function PageForm() {

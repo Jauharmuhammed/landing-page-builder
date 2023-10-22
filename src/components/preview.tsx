@@ -1,7 +1,7 @@
-import ProjectLayout from "@/app/project/[id]/layout";
-import ProjectPage from "@/app/project/[id]/page";
+import ProjectLayout from "@/app/project/view/[id]/layout";
+import ProjectPage from "@/app/project/view/[id]/page";
 import React from "react";
-import { layoutReducer } from "../../types";
+import { layoutReducer } from "../types/types";
 import { useSelector } from "react-redux";
 
 type Props = {};

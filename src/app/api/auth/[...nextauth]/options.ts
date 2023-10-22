@@ -4,7 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/lib/db";
+import { users } from "@/lib/db/schema";
 import "dotenv/config";
+import { eq } from "drizzle-orm";
+import { nanoid } from "@reduxjs/toolkit";
 
 export const options: NextAuthOptions = {
     adapter: DrizzleAdapter(db),
@@ -55,4 +58,40 @@ export const options: NextAuthOptions = {
         logo: `${process.env.NEXTAUTH_URL}/images/landerr.svg`, // Absolute URL to image
         buttonText: "", // Hex color code
     },
+    callbacks: {
+        async session({ session, token }) {
+            // do something to session
+            session.user = {
+                id: token.id,
+                email: token.email,
+                name: token.name,
+                image: token.image as string,
+              };
+            return session;
+        },
+        async jwt({ token, user }) {
+            const email = token.email;
+
+            const dbUser = (
+                await db
+                    .select()
+                    .from(users)
+                    .where(eq(users.email, email as string))
+            )[0];
+
+            if (!dbUser) {
+                token.id = user.id;
+                return token;
+            }
+
+            return {
+                id: dbUser.id,
+                email: dbUser.email,
+                name: dbUser.name,
+                image: dbUser.image,
+            };
+        },
+    },
 };
+
+export const getAuthSession = () => getServerSession(options);

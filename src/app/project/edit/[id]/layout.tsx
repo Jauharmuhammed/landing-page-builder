@@ -1,10 +1,15 @@
 "use client";
 
+import { getProjectAction } from "@/app/action/project";
+import { getAuthSession } from "@/app/api/auth/[...nextauth]/options";
 import Preview from "@/components/preview";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { db } from "@/lib/db";
+import { projects } from "@/lib/db/schema";
 import { store } from "@/store/store";
+import { eq } from "drizzle-orm";
 import { Provider } from "react-redux";
 
 const sidebarNavItems = [
@@ -26,7 +31,22 @@ const sidebarNavItems = [
     },
 ];
 
-export default function NewLandingPageLayout({ children }: { children: React.ReactNode }) {
+export default async function NewLandingPageLayout({
+    children,
+    params,
+}: {
+    children: React.ReactNode;
+    params: any;
+}) {
+    console.log(params.id);
+    try {
+        const session = await getAuthSession();
+        if (!session) return Error("Not logged in");
+        const project = await db.select().from(projects).where(eq(projects.id, params.id));
+        console.log(project);
+    } catch (error) {
+        console.log(error);
+    }
     return (
         <Provider store={store}>
             <main className="w-full flex justify-center p-12">

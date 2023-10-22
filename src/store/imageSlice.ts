@@ -6,7 +6,7 @@ export type ImageElementStore = {
 
 type ImageElement = {
     key: string;
-    content: string;
+    content: Blob;
     filename: string;
 };
 

@@ -1,37 +1,65 @@
-import landingPageData from "@/data/landing-page";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { pageData } from "@/types/types";
 
-const initialState = landingPageData;
+const initialState: pageData = {
+    styles: {},
+    elements: {},
+};
 
 const layoutSlice = createSlice({
     name: "layout",
     initialState,
     reducers: {
-        updateNavbarActionLabel: (state, action) => {
-            state.elements.navbar.actions[0].label = action.payload;
+        updateLayout: (state, action) => {
+            state = action.payload;
         },
-        updateNavbarLinkLabel: (state, action) => {
-            const { index, value } = action.payload;
-            state.elements.navbar.links[index].label = value;
+        updateNavbarActionLabel: (state, action: PayloadAction<string>) => {
+            if (state.elements.navbar && state.elements.navbar.actions) {
+                state.elements.navbar.actions[0].label = action.payload;
+            }
         },
-        updateNavbarLinkTo: (state, action) => {
-            const { index, value } = action.payload;
-            state.elements.navbar.links[index].link = value;
+        updateNavbarLinkLabel: (state, action: PayloadAction<{ index: number; value: string }>) => {
+            if (state.elements.navbar && state.elements.navbar.links) {
+                const { index, value } = action.payload;
+                if (state.elements.navbar.links[index]) {
+                    state.elements.navbar.links[index].label = value;
+                }
+            }
         },
-        updateNavbarLinkAdd: (state, action) => {
-            state.elements.navbar.links.push({ label: "", link: "" });
+        updateNavbarLinkTo: (state, action: PayloadAction<{ index: number; value: string }>) => {
+            if (state.elements.navbar && state.elements.navbar.links) {
+                const { index, value } = action.payload;
+                if (state.elements.navbar.links[index]) {
+                    state.elements.navbar.links[index].link = value;
+                }
+            }
         },
-        updateNavbarLinkRemove: (state, action) => {
-            state.elements.navbar.links.splice(action.payload, 1);
+        updateNavbarLinkAdd: (state) => {
+            if (state.elements.navbar && state.elements.navbar.links) {
+                state.elements.navbar.links.push({ label: "", link: "" });
+            }
+        },
+        updateNavbarLinkRemove: (state, action: PayloadAction<number>) => {
+            if (state.elements.navbar && state.elements.navbar.links) {
+                state.elements.navbar.links.splice(action.payload, 1);
+            }
+        },
+        updateNavbarLogo: (state, action: PayloadAction<string>) => {
+            if (state.elements.navbar && state.elements.navbar.logo) {
+                state.elements.navbar.logo.src = action.payload;
+            }
         },
     },
 });
 
 export const {
+    updateLayout,
     updateNavbarActionLabel,
     updateNavbarLinkLabel,
     updateNavbarLinkTo,
     updateNavbarLinkAdd,
     updateNavbarLinkRemove,
+    updateNavbarLogo,
 } = layoutSlice.actions;
+
 export default layoutSlice.reducer;

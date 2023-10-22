@@ -1,7 +1,7 @@
 import Header from "@/components/sections/header";
 import Services from "@/components/sections/services";
 import landingPageData from "@/data/landing-page";
-import { pageData } from "../../../../types";
+import { pageData } from "../../../../types/types";
 
 type propsType = {
     pageData?: pageData;

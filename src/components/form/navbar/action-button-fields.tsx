@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateNavbarActionLabel } from "@/store/layoutSlice";
 
 import { UseFormReturn } from "react-hook-form";
-import { layoutReducer } from "../../../../types";
-import { formSchema } from "@/app/project/new/constants";
+import { layoutReducer } from "../../../types/types";
+import { formSchema } from "@/app/project/edit/[id]/constants";
 
 type Props = {
     form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
@@ -17,7 +17,7 @@ type Props = {
 const ActionButtonFields = ({ form }: Props) => {
     const navbar = useSelector((state: layoutReducer) => state.layout.elements.navbar);
     const dispatch = useDispatch();
-    form.setValue("navbarLabel", navbar.actions[0].label);
+    form.setValue("navbarLabel", navbar?.actions?.[0]?.label || "");
     return (
         <>
             <TextInput

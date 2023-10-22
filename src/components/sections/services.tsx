@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { services } from "@/types/types";
 import { ArrowRight } from "lucide-react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Image from "next/image";
@@ -6,25 +7,14 @@ import React from "react";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
-type Section = {
-    src: string;
-    link: string;
-    title: string;
-    description: string;
-    label: string;
-};
-
 type Props = {
-    elements: {
-        header: {
-            title: string;
-            description: string;
-        };
-        section: Section[];
-    };
+    elements?: services;
 };
 
 const Services = ({ elements }: Props) => {
+    if (!elements) {
+        return null;
+    }
     const { header, section } = elements;
     return (
         <section className="p-12 space-y-6">
@@ -43,7 +33,7 @@ const Services = ({ elements }: Props) => {
                                 <p className="">{element.description}</p>
                             </div>
                             <div className="bg-slate-300 rounded-full p-3">
-                                <ArrowRight size={36} strokeWidth={1} className="-rotate-45 "/>
+                                <ArrowRight size={36} strokeWidth={1} className="-rotate-45 " />
                             </div>
                         </div>
                         <Image

@@ -11,28 +11,28 @@ export type navbar = {
     logo: {
         src: string;
     };
-    links: link[];
-    actions: button[];
+    links?: link[];
+    actions?: button[];
 };
 
 export type header = {
     heading: string;
-    description: string;
-    image: string;
-    ctaButton: button;
+    description?: string;
+    ctaButton?: button;
+    image?: string;
 };
 
 export type services = {
     header: {
         title: string;
-        description: string;
+        description?: string;
     };
     section: {
         src: string;
-        link: string;
+        link?: string;
         title: string;
-        description: string;
-        label: string;
+        description?: string;
+        label?: string;
     }[];
 };
 
@@ -60,19 +60,23 @@ export type footer = {
 
 export type pageData = {
     styles: {
-        primaryColor: string;
-        secondaryColor: string;
+        primaryColor?: string;
+        secondaryColor?: string;
     };
     elements: {
-        navbar: navbar;
-        header: header;
-        services: services;
-        footer: footer;
+        navbar?: navbar;
+        header?: header;
+        services?: services;
+        footer?: footer;
     };
 };
 
 export type layoutReducer = {
     layout: pageData;
+};
+
+export type projectReducer = {
+    newProject: string;
 };
 
 export interface NavItem {

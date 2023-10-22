@@ -2,44 +2,17 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
-
-type links = {
-    label: string;
-    link: string;
-};
+import { footer } from "@/types/types";
 
 type Props = {
-    elements: {
-        logo: {
-            src: string;
-        };
-        section: {
-            main: {
-                title: string;
-                description: string;
-                ctaButton: {
-                    label: string;
-                    link: string;
-                    varient: string;
-                };
-                copyright: string;
-                privacyAndPolicy: {
-                    label: string;
-                    link: string;
-                };
-            };
-            contact: {
-                mail: string;
-                phone: string;
-                address: string;
-            };
-            social: links[];
-            services: links[];
-        };
-    };
+    elements?: footer;
 };
 
 const Footer = ({ elements }: Props) => {
+    if (!elements) {
+        return null;
+    }
+
     const {
         section: { main, contact, services, social },
     } = elements;
@@ -87,7 +60,10 @@ const Footer = ({ elements }: Props) => {
                     {social.map((social) => (
                         <li key={social.label} className="flex items-center gap-2 group">
                             <span>{social.label}</span>
-                            <ArrowRight size={20} className="-rotate-45 text-slate-700 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                            <ArrowRight
+                                size={20}
+                                className="-rotate-45 text-slate-700 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                            />
                         </li>
                     ))}
                 </ul>

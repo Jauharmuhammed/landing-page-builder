@@ -2,10 +2,11 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { ModeToggle } from "./mode-toggle";
 
 type Props = {};
 
-const Navbar = (props: Props) => {
+const  Navbar = (props: Props) => {
     return (
         <header className="w-full py-6 px-12 flex justify-between items-center">
             <div className="flex space-x-4">
@@ -22,6 +23,7 @@ const Navbar = (props: Props) => {
                 <li>Contact</li>
             </ul>
             <div className="flex space-x-4">
+                <ModeToggle />
                 <Link href="/api/auth/signout">
                     <Button>Sign Out</Button>
                 </Link>

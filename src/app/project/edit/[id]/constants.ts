@@ -20,8 +20,8 @@ export const formSchema = z.object({
                     .max(255, { message: "link cannot be more than 255 characters." }),
             })
         )
-        .refine((input) => (input ? input.length <= 3 : true), {
-            message: "The combined length of enumInput and customInput may not be longer than 3",
+        .refine((input) => (input ? input.length <= 5 : true), {
+            message: "The combined length of enumInput and customInput may not be longer than 5",
         })
         .optional(),
 });

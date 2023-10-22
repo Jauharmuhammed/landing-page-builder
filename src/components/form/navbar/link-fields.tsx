@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import * as z from "zod";
 import { useSelector, useDispatch } from "react-redux";
 
-import { formSchema } from "@/app/project/new/constants";
+import { formSchema } from "@/app/project/edit/[id]/constants";
 import { UseFormReturn, useFieldArray } from "react-hook-form";
 import {
     FormControl,
@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
-import { layoutReducer } from "../../../../types";
+import { layoutReducer } from "../../../types/types";
 import {
     updateNavbarLinkAdd,
     updateNavbarLinkLabel,
@@ -30,7 +30,9 @@ type Props = {
 };
 
 const LinkFields = ({ form }: Props) => {
-    const navbarLinks = useSelector((state: layoutReducer) => state.layout.elements.navbar.links);
+    const navbarLinks = useSelector(
+        (state: layoutReducer) => state.layout.elements?.navbar?.links || []
+    );
     const dispatch = useDispatch();
     const { fields, append, remove } = useFieldArray({
         name: "urls",
@@ -144,7 +146,7 @@ const LinkFields = ({ form }: Props) => {
                         return;
                     }
                     append({ label: "", link: "" });
-                    dispatch(updateNavbarLinkAdd({}));
+                    dispatch(updateNavbarLinkAdd());
                 }}>
                 Add Links
             </Button>
