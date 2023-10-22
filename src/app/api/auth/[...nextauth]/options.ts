@@ -4,13 +4,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/lib/db";
-import { randomBytes, randomUUID } from "crypto";
 import "dotenv/config";
 
 export const options: NextAuthOptions = {
     adapter: DrizzleAdapter(db),
     secret: process.env.NEXTAUTH_SECRET!,
-    debug: true,
     session: {
         strategy: "jwt",
     },
@@ -54,9 +52,7 @@ export const options: NextAuthOptions = {
     theme: {
         colorScheme: "auto", // "auto" | "dark" | "light"
         brandColor: "", // Hex color code
-        logo: "/images/lander.svg", // Absolute URL to image
+        logo: `${process.env.NEXTAUTH_URL}/images/landerr.svg`, // Absolute URL to image
         buttonText: "", // Hex color code
     },
 };
-
-export const getAuthSession = () => getServerSession(options);
