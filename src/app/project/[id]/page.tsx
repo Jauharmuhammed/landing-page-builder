@@ -1,13 +1,20 @@
 import Header from "@/components/sections/header";
 import Services from "@/components/sections/services";
-import data from "@/data/landing-page";
+import landingPageData from "@/data/landing-page";
+import { pageData } from "../../../../types";
 
-export default function ProjectPage() {
-    
+type propsType = {
+    pageData?: pageData;
+};
+
+export default function ProjectPage({ pageData }: propsType) {
+    if (!pageData) {
+        pageData = landingPageData;
+    }
     return (
         <div className="flex flex-col">
-            <Header elements={data.elements.header} />
-            <Services elements={data.elements.services} />
+            <Header elements={pageData.elements.header} />
+            <Services elements={pageData.elements.services} />
         </div>
     );
 }

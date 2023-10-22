@@ -1,13 +1,22 @@
 import Footer from "@/components/sections/footer";
 import Navbar from "@/components/sections/navbar";
 import data from "@/data/landing-page";
+import { pageData } from "../../../../types";
 
-export default function ProjectLayout({ children }: { children: React.ReactNode }) {
+type propsType = {
+    children: React.ReactNode;
+    pageData?: pageData;
+};
+
+export default function ProjectLayout({ children, pageData }: propsType) {
+    if (!pageData) {
+        pageData = data;
+    }
     return (
         <main>
-            <Navbar elements={data.elements.navbar} />
+            <Navbar elements={pageData.elements.navbar} />
             {children}
-            <Footer elements={data.elements.footer}/>
+            <Footer elements={pageData.elements.footer} />
         </main>
     );
 }
