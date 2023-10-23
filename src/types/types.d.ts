@@ -1,14 +1,14 @@
 export type link = {
-    label: string;
-    link: string;
+    label?: string;
+    link?: string;
 };
 
 export type button = link & {
-    varient: string;
+    varient?: string;
 };
 
 export type navbar = {
-    logo: {
+    logo?: {
         src: string;
     };
     links?: link[];

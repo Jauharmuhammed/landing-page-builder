@@ -22,12 +22,19 @@ const Navbar = ({ elements }: Props) => {
     return (
         <nav className="w-full py-7 px-12 flex justify-between items-center">
             <div className="flex space-x-4">
-                <Image
-                    width={10}
-                    height={10}
-                    className="h-6 w-fit"
-                    src={imagePreview ? URL.createObjectURL(imagePreview) : elements.logo.src}
-                    alt="Landerr logo"></Image>
+                {imagePreview || elements.logo ? (
+                    <Image
+                        width={100}
+                        height={100}
+                        className="h-6 w-fit"
+                        src={
+                            imagePreview
+                                ? URL.createObjectURL(imagePreview)
+                                : elements.logo?.src || ""
+                        }
+                        alt="Landerr logo"
+                    />
+                ) : null}
             </div>
             {elements.links && (
                 <ul className="flex space-x-16 items-center">

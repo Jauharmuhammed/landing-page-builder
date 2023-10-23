@@ -7,7 +7,9 @@ import * as z from "zod";
 import { getAuthSession } from "../api/auth/[...nextauth]/options";
 import { projects } from "@/lib/db/schema";
 import { db } from "@/lib/db";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
+import { pageData } from "@/types/types";
+import { json } from "stream/consumers";
 
 type NewProject = typeof projects.$inferInsert;
 
@@ -35,4 +37,14 @@ export async function getProjectAction(id: string) {
     if (!session) return Error("Not logged in");
     const project = await db.select().from(projects).where(eq(projects.id, id));
     return project[0];
+}
+
+export async function updateProjectLayoutAction(id: string, layout: pageData) {
+    const session = await getAuthSession();
+    if (!session) return Error("Not logged in");
+
+    await db
+        .update(projects)
+        .set({ json: layout })
+        .where(and(eq(projects.id, id), eq(projects.userId, session.user.id)));
 }

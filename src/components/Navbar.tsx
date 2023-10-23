@@ -1,20 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
+import { useTheme } from "next-themes";
 
 type Props = {};
 
-const  Navbar = (props: Props) => {
+const Navbar = (props: Props) => {
+    const { resolvedTheme } = useTheme();
     return (
         <header className="w-full py-6 px-12 flex justify-between items-center">
             <div className="flex space-x-4">
                 <Image
-                    width={10}
-                    height={10}
+                    width={100}
+                    height={100}
                     className="h-6 w-fit"
-                    src={"images/landerr.svg"}
+                    src={
+                        resolvedTheme === "dark"
+                            ? "/images/landerr-text-mark-dark-theme.png"
+                            : "/images/landerr-text-mark-light-theme.png"
+                    }
                     alt="Landerr logo"></Image>
             </div>
             <ul className="flex space-x-16 items-center">

@@ -27,7 +27,7 @@ import { Card } from "./ui/card";
 import { Loader2, Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { db } from "@/lib/db";
-import { addProjectsAction } from "@/app/action/project";
+import { addProjectsAction } from "@/app/_actions/project";
 import { useRouter } from "next/navigation";
 
 type Props = {};

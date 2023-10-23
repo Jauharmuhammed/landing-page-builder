@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import * as z from "zod";
 
@@ -18,6 +18,7 @@ const ActionButtonFields = ({ form }: Props) => {
     const navbar = useSelector((state: layoutReducer) => state.layout.elements.navbar);
     const dispatch = useDispatch();
     form.setValue("navbarLabel", navbar?.actions?.[0]?.label || "");
+
     return (
         <>
             <TextInput

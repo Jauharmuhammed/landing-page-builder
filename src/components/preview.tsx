@@ -1,3 +1,5 @@
+"use client";
+
 import ProjectLayout from "@/app/project/view/[id]/layout";
 import ProjectPage from "@/app/project/view/[id]/page";
 import React from "react";

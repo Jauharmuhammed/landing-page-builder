@@ -1,38 +1,39 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
+import { useParams } from "next/navigation";
+
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import ActionButtonFields from "@/components/form/navbar/action-button-fields";
 import LogoFields from "@/components/form/navbar/logo-fields";
-import { ImageElementStore } from "@/store/imageSlice";
 import LinkFields from "@/components/form/navbar/link-fields";
 
-import "dotenv/config";
+import { updateProjectLayoutAction } from "@/app/_actions/project";
+import { ImageElementStore } from "@/store/imageSlice";
 import { updateNavbarLogo } from "@/store/layoutSlice";
-import { db } from "@/lib/db";
-import { projects } from "@/lib/db/schema";
-import { layoutReducer, projectReducer } from "@/types/types";
+import { layoutReducer } from "@/types/types";
 import { formSchema } from "./constants";
 
+import { Loader2 } from "lucide-react";
+
 export default function NavbarForm() {
+    const params = useParams();
     const navbarLinks = useSelector(
         (state: layoutReducer) => state.layout.elements.navbar?.links || []
     );
     const data = useSelector((state: layoutReducer) => state.layout);
-    const newProject = useSelector((state: projectReducer) => state.newProject);
     const dispatch = useDispatch();
 
     type formSchemaValues = z.infer<typeof formSchema>;
 
     const defaultValues: Partial<formSchemaValues> = {
-        links: navbarLinks.map((link) => ({ label: link.label, link: link.link })),
+        links: navbarLinks.map((link) => ({ label: link.label || "", link: link.link || "" })),
     };
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -45,28 +46,35 @@ export default function NavbarForm() {
         return imageElement ? imageElement.content : null;
     });
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        if (!navbarLogo) {
-            form.setError("logo", { message: "Image is required" });
+    const isLoading = form.formState.isSubmitting;
+
+    const uploadImage = async (image: Blob) => {
+        try {
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("upload_preset", "landing-page-builder");
+
+            const uploadURL = `https://api.cloudinary.com/v1_1/dpofqivee/image/upload`;
+
+            const response = await axios.post(uploadURL, formData).catch((err) => console.log(err));
+            dispatch(updateNavbarLogo(response?.data?.secure_url));
+        } catch (error) {
+            console.log("[IMAGE_UPLOAD_ERROR]", error);
         }
+    };
 
-        const formData = new FormData();
-        formData.append("file", navbarLogo!);
-        formData.append("upload_preset", "landing-page-builder");
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            if (!navbarLogo && !data.elements.navbar?.logo?.src) {
+                form.setError("logo", { message: "Image is required" });
+            }
 
-        const uploadURL = `https://api.cloudinary.com/v1_1/dpofqivee/image/upload`;
+            navbarLogo && (await uploadImage(navbarLogo!));
+            await updateProjectLayoutAction(params.id as string, data);
 
-        const response = await axios.post(uploadURL, formData).catch((err) => console.log(err));
-        console.log(response?.data?.secure_url);
-        dispatch(updateNavbarLogo(response?.data?.secure_url));
-        values.logo = response?.data?.secure_url;
-
-        console.log(values);
-        if (newProject) {
-            //update existing project
-        } else {
-            // create new project
-            // const project = await db.insert(projects).values({ name: 'Andrew' })
+            console.log(data);
+        } catch (error) {
+            console.log("[NAVBAR_LAYOUT_SAVE_ERROR]", error);
         }
     }
 
@@ -76,7 +84,15 @@ export default function NavbarForm() {
                 <LogoFields form={form} />
                 <ActionButtonFields form={form} />
                 <LinkFields form={form} />
-                <Button type="submit">Save</Button>
+                <Button disabled={isLoading} type="submit">
+                    {isLoading && (
+                        <>
+                            <Loader2 size={16} className="animate-spin" />
+                            &nbsp;
+                        </>
+                    )}
+                    Save
+                </Button>
             </form>
         </Form>
     );

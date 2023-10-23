@@ -55,7 +55,7 @@ const LinkFields = ({ form }: Props) => {
                     <FormItem className="flex-1 mb-3">
                         <FormLabel>Navigation</FormLabel>
                         <FormDescription>
-                            Add links to your website, blog, or social media profiles.
+                            Add links to pages or sections to navigate.
                         </FormDescription>
                         <FormMessage />
                     </FormItem>
@@ -72,7 +72,7 @@ const LinkFields = ({ form }: Props) => {
                                     Label
                                 </FormLabel>
                                 <FormDescription className={cn(index !== 0 && "sr-only")}>
-                                    Add links to your website, blog, or social media profiles.
+                                    Labels shows up in the navbar.
                                 </FormDescription>
                                 <FormControl>
                                     <Input
@@ -101,7 +101,7 @@ const LinkFields = ({ form }: Props) => {
                             <FormItem className="flex-1">
                                 <FormLabel className={cn(index !== 0 && "sr-only")}>Link</FormLabel>
                                 <FormDescription className={cn(index !== 0 && "sr-only")}>
-                                    Add links to your website, blog, or social media profiles.
+                                    Link destinations to pages or sections.
                                 </FormDescription>
                                 <FormControl>
                                     <Input

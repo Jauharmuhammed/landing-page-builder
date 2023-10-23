@@ -65,7 +65,7 @@ const ImageInput = ({ form, fieldname, label, placeholder, description, onChange
                     <Image
                         width={100}
                         height={100}
-                        className="my-auto h-full max-h-20"
+                        className="my-auto h-full max-h-20 object-contain"
                         src={URL.createObjectURL(imagePreview)}
                         alt="preview"
                     />
