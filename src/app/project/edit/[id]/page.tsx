@@ -21,6 +21,7 @@ import { layoutReducer } from "@/types/types";
 import { formSchema } from "./constants";
 
 import { Loader2 } from "lucide-react";
+import cloneDeep from "lodash/cloneDeep";
 
 export default function NavbarForm() {
     const params = useParams();
@@ -43,10 +44,15 @@ export default function NavbarForm() {
 
     const navbarLogo = useSelector((state: ImageElementStore) => {
         const imageElement = state.image.find((element) => element.key === "logo");
-        return imageElement ? imageElement.content : null;
+        return imageElement ? imageElement.url : null;
     });
 
     const isLoading = form.formState.isSubmitting;
+
+    const getImageBlob = async (url: string) => {
+        const blob = await fetch(url).then((r) => r.blob());
+        return blob;
+    };
 
     const uploadImage = async (image: Blob) => {
         try {
@@ -58,6 +64,7 @@ export default function NavbarForm() {
 
             const response = await axios.post(uploadURL, formData).catch((err) => console.log(err));
             dispatch(updateNavbarLogo(response?.data?.secure_url));
+            return response?.data?.secure_url;
         } catch (error) {
             console.log("[IMAGE_UPLOAD_ERROR]", error);
         }
@@ -69,8 +76,18 @@ export default function NavbarForm() {
                 form.setError("logo", { message: "Image is required" });
             }
 
-            navbarLogo && (await uploadImage(navbarLogo!));
-            await updateProjectLayoutAction(params.id as string, data);
+            let url;
+            if (navbarLogo) {
+                url = await uploadImage(await getImageBlob(navbarLogo));
+            }
+
+            const newData = cloneDeep(data);
+
+            newData.elements.navbar = newData.elements.navbar || {};
+            newData.elements.navbar.logo = newData.elements.navbar.logo || { src: "" };
+            newData.elements.navbar.logo.src = url;
+
+            await updateProjectLayoutAction(params.id as string, newData);
 
             console.log(data);
         } catch (error) {

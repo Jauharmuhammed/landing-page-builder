@@ -12,7 +12,7 @@ type Props = {
 const Navbar = ({ elements }: Props) => {
     const imagePreview = useSelector((state: ImageElementStore) => {
         const imageElement = state.image.find((element) => element.key === "logo");
-        return imageElement ? imageElement.content : null;
+        return imageElement ? imageElement.url : null;
     });
 
     if (!elements) {
@@ -22,16 +22,12 @@ const Navbar = ({ elements }: Props) => {
     return (
         <nav className="w-full py-7 px-12 flex justify-between items-center">
             <div className="flex space-x-4">
-                {imagePreview || elements.logo ? (
+                {imagePreview ? (
                     <Image
                         width={100}
                         height={100}
                         className="h-6 w-fit"
-                        src={
-                            imagePreview
-                                ? URL.createObjectURL(imagePreview)
-                                : elements.logo?.src || ""
-                        }
+                        src={imagePreview!}
                         alt="Landerr logo"
                     />
                 ) : null}

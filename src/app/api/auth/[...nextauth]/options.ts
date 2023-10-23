@@ -1,13 +1,10 @@
 import { getServerSession, type NextAuthOptions } from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import "dotenv/config";
 import { eq } from "drizzle-orm";
-import { nanoid } from "@reduxjs/toolkit";
 
 export const options: NextAuthOptions = {
     adapter: DrizzleAdapter(db),

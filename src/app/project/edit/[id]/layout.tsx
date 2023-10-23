@@ -38,7 +38,6 @@ export default function NewLandingPageLayout({
     ];
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [dataFetched, setDataFetched] = useState<boolean>(false);
     const dispatch = useDispatch();
 
     const getProjectDetails = async (id: string) => {
@@ -50,9 +49,7 @@ export default function NewLandingPageLayout({
             setIsLoading(true);
 
             const response = await axios.get(`/api/project/${id}`);
-            console.log(response);
             dispatch(setLayout(response.data.json));
-            setDataFetched(true);
         } catch (error) {
             console.log(error);
         } finally {
@@ -67,7 +64,7 @@ export default function NewLandingPageLayout({
         return <Loader fill />;
     }
 
-    return dataFetched ? (
+    return (
         <main className="w-full flex justify-center p-12">
             <Tabs defaultValue="edit" className="w-full flex flex-col items-center">
                 <TabsList className="grid w-[400px] grid-cols-2">
@@ -96,7 +93,5 @@ export default function NewLandingPageLayout({
                 </TabsContent>
             </Tabs>
         </main>
-    ) : (
-        <Loader fill />
     );
 }

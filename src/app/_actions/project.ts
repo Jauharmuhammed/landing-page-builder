@@ -9,7 +9,6 @@ import { projects } from "@/lib/db/schema";
 import { db } from "@/lib/db";
 import { and, eq } from "drizzle-orm";
 import { pageData } from "@/types/types";
-import { json } from "stream/consumers";
 
 type NewProject = typeof projects.$inferInsert;
 

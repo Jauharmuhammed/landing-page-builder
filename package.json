@@ -27,6 +27,7 @@
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.6",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.287.0",
     "next": "13.5.4",
     "next-auth": "^4.23.2",
@@ -43,6 +44,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.200",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

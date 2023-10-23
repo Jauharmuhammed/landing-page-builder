@@ -5,7 +5,6 @@ import React from "react";
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
-
 import NewProjectForm from "@/components/new-project-form";
 
 type Props = {};

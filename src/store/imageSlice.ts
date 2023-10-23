@@ -6,7 +6,8 @@ export type ImageElementStore = {
 
 type ImageElement = {
     key: string;
-    content: Blob;
+    url: string;
+
     filename: string;
 };
 
@@ -17,14 +18,14 @@ const imageSlice = createSlice({
     initialState,
     reducers: {
         setImagePreview: (state, action) => {
-            const { key, content, filename } = action.payload;
+            const { key, url, filename } = action.payload;
 
             const index = state.findIndex((element) => element.key === key);
 
             if (index !== -1) {
-                state[index] = { ...state[index], content };
+                state[index] = { ...state[index], url };
             } else {
-                state.push({ key, content, filename });
+                state.push({ key, url, filename });
             }
         },
     },
