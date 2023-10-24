@@ -25,11 +25,11 @@ const Navbar = (props: Props) => {
                     }
                     alt="Landerr logo"></Image>
             </div>
-            <ul className="hidden md:flex space-x-16 items-center">
+            {/* <ul className="hidden md:flex space-x-16 items-center">
                 <li>Home</li>
                 <li>About</li>
                 <li>Contact</li>
-            </ul>
+            </ul> */}
             <div className="flex space-x-4">
                 <ModeToggle />
                 <Link href="/api/auth/signout">

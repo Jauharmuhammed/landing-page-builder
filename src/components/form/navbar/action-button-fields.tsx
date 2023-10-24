@@ -8,10 +8,10 @@ import { updateNavbarActionLabel } from "@/store/layoutSlice";
 
 import { UseFormReturn } from "react-hook-form";
 import { layoutReducer } from "../../../types/types";
-import { formSchema } from "@/app/project/edit/[id]/constants";
+import { navbarFromSchema } from "@/lib/validations";
 
 type Props = {
-    form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
+    form: UseFormReturn<z.infer<typeof navbarFromSchema>, any, undefined>;
 };
 
 const ActionButtonFields = ({ form }: Props) => {

@@ -19,12 +19,11 @@ type Props = {
     form: any;
     fieldname: string;
     label: string;
-    placeholder: string;
     description: string;
     onChange: (value: string) => void;
 };
 
-const ImageInput = ({ form, fieldname, label, placeholder, description, onChange }: Props) => {
+const ImageInput = ({ form, fieldname, label, description, onChange }: Props) => {
     const navbarLogo = useSelector(
         (state: layoutReducer) => state.layout.elements.navbar?.logo?.src
     );

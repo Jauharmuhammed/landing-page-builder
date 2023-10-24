@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import * as z from "zod";
 import { useSelector, useDispatch } from "react-redux";
 
-import { formSchema } from "@/app/project/edit/[id]/constants";
 import { UseFormReturn, useFieldArray } from "react-hook-form";
 import {
     FormControl,
@@ -24,9 +23,10 @@ import {
     updateNavbarLinkRemove,
     updateNavbarLinkTo,
 } from "@/store/layoutSlice";
+import { navbarFromSchema } from "@/lib/validations";
 
 type Props = {
-    form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
+    form: UseFormReturn<z.infer<typeof navbarFromSchema>, any, undefined>;
 };
 
 const LinkFields = ({ form }: Props) => {

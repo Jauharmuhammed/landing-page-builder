@@ -5,17 +5,8 @@ import { ImageElementStore } from "@/store/imageSlice";
 import { useSelector } from "react-redux";
 import { navbar } from "@/types/types";
 
-import {
-    Sheet,
-    SheetClose,
-    SheetContent,
-    SheetDescription,
-    SheetFooter,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from "@/components/ui/sheet";
-import { Menu, icons } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 
 type Props = {
     elements?: navbar;
@@ -37,9 +28,9 @@ const Navbar = ({ elements, projectId }: Props) => {
         <nav className="w-full py-3 md:py-7 flex justify-between items-center relative">
             <Sheet>
                 <div className="flex space-x-1 items-center">
-                    <SheetTrigger asChild>
+                    <SheetTrigger asChild className="md:hidden">
                         <Button variant={"ghost"} size={"icon"}>
-                            <Menu size={18} className="md:hidden" />
+                            <Menu size={18} />
                         </Button>
                     </SheetTrigger>
                     {imagePreview ? (
@@ -63,7 +54,11 @@ const Navbar = ({ elements, projectId }: Props) => {
                     {elements.links && (
                         <ul className="flex-col space-y-2 items-center mt-16">
                             {elements.links.map((link) => (
-                                <li key={link.label} className="p-4 cursor-pointer rounded-md hover:bg-slate-500/10">{link.label}</li>
+                                <li
+                                    key={link.label}
+                                    className="p-4 cursor-pointer rounded-md hover:bg-slate-500/10">
+                                    {link.label}
+                                </li>
                             ))}
                         </ul>
                     )}
@@ -71,7 +66,9 @@ const Navbar = ({ elements, projectId }: Props) => {
                 {elements.actions && (
                     <div className="flex space-x-4">
                         {elements.actions.map((action) => (
-                            <Button key={action.label}>{action.label}</Button>
+                            <Button className="rounded-full" key={action.label}>
+                                {action.label}
+                            </Button>
                         ))}
                     </div>
                 )}

@@ -7,15 +7,15 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { formSchema } from "@/app/project/edit/[id]/constants";
 import ActionButtonInput from "./navbar/action-button-fields";
+import { navbarFromSchema } from "@/lib/validations";
 
 export default function PageForm() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof navbarFromSchema>>({
+        resolver: zodResolver(navbarFromSchema),
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    function onSubmit(values: z.infer<typeof navbarFromSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values);

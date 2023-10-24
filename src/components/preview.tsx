@@ -15,9 +15,11 @@ const Preview = ({ projectId }: Props) => {
     const data = useSelector((state: layoutReducer) => state.layout);
 
     return (
-        <ProjectLayout pageData={data} projectId={projectId}>
-            <ProjectPage pageData={data} />
-        </ProjectLayout>
+        <div className="border rounded-md h-[90vh] overflow-y-auto">
+            <ProjectLayout pageData={data} projectId={projectId}>
+                <ProjectPage pageData={data} />
+            </ProjectLayout>
+        </div>
     );
 };
 

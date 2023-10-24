@@ -10,35 +10,37 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import ActionButtonFields from "@/components/form/navbar/action-button-fields";
-import LogoFields from "@/components/form/navbar/logo-fields";
 import LinkFields from "@/components/form/navbar/link-fields";
 
 import { updateProjectLayoutAction } from "@/app/_actions/project";
 import { ImageElementStore } from "@/store/imageSlice";
-import { updateNavbarLogo } from "@/store/layoutSlice";
+import { updateNavbarActionLabel, updateNavbarLogo } from "@/store/layoutSlice";
 import { layoutReducer } from "@/types/types";
-import { formSchema } from "./constants";
 
 import { Loader2 } from "lucide-react";
 import cloneDeep from "lodash/cloneDeep";
+import ImageInput from "@/components/form/image-input";
+import TextInput from "@/components/form/text-input";
+import { navbarFromSchema } from "@/lib/validations";
 
 export default function NavbarForm() {
     const params = useParams();
     const navbarLinks = useSelector(
         (state: layoutReducer) => state.layout.elements.navbar?.links || []
     );
+    const navbar = useSelector((state: layoutReducer) => state.layout.elements.navbar);
     const data = useSelector((state: layoutReducer) => state.layout);
     const dispatch = useDispatch();
 
-    type formSchemaValues = z.infer<typeof formSchema>;
+    type formSchemaValues = z.infer<typeof navbarFromSchema>;
 
     const defaultValues: Partial<formSchemaValues> = {
         links: navbarLinks.map((link) => ({ label: link.label || "", link: link.link || "" })),
+        navbarLabel: navbar?.actions?.[0]?.label || "",
     };
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof navbarFromSchema>>({
+        resolver: zodResolver(navbarFromSchema),
         defaultValues,
     });
 
@@ -70,7 +72,7 @@ export default function NavbarForm() {
         }
     };
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof navbarFromSchema>) {
         try {
             if (!navbarLogo && !data.elements.navbar?.logo?.src) {
                 form.setError("logo", { message: "Image is required" });
@@ -80,7 +82,6 @@ export default function NavbarForm() {
             if (navbarLogo) {
                 url = await uploadImage(await getImageBlob(navbarLogo));
             }
-
 
             const newData = cloneDeep(data);
 
@@ -99,8 +100,21 @@ export default function NavbarForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <LogoFields form={form} projectId={params.id as string} />
-                <ActionButtonFields form={form} />
+                <ImageInput
+                    form={form}
+                    fieldname={`logo-${params.id}`}
+                    onChange={(value) => dispatch(updateNavbarActionLabel(value))}
+                    label="Logo"
+                    description="This will be the label for the action button on navbar."
+                />
+                <TextInput
+                    form={form}
+                    fieldname="navbarLabel"
+                    onChange={(value) => dispatch(updateNavbarActionLabel(value))}
+                    label="Action button label"
+                    placeholder="Sing in"
+                    description="This will be the label for the action button on navbar."
+                />
                 <LinkFields form={form} />
                 <Button disabled={isLoading} type="submit">
                     {isLoading && (

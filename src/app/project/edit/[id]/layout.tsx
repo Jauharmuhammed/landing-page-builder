@@ -70,7 +70,7 @@ export default function NewLandingPageLayout({
     }
 
     return (
-        <main className="w-full flex justify-center py-8 px-3 md:p-12">
+        <main className="w-full flex justify-center py-4 px-3 md:px-12 md:py-4">
             <Tabs defaultValue="edit" className="w-full flex flex-col items-center">
                 <TabsList className="grid md:w-[400px] grid-cols-2">
                     <TabsTrigger value="edit">Edit</TabsTrigger>
