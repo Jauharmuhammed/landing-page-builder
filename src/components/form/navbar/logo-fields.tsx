@@ -12,17 +12,16 @@ import ImageInput from "../image-input";
 
 type Props = {
     form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
+    projectId: string;
 };
 
-const LogoFields = ({ form }: Props) => {
-    const navbar = useSelector((state: layoutReducer) => state.layout.elements.navbar);
+const LogoFields = ({ form, projectId }: Props) => {
     const dispatch = useDispatch();
-    // form.setValue("navbarLabel", navbar.actions[0].label);
     return (
         <>
             <ImageInput
                 form={form}
-                fieldname="logo"
+                fieldname={`logo-${projectId}`}
                 onChange={(value) => dispatch(updateNavbarActionLabel(value))}
                 label="Logo"
                 placeholder="Sing in"

@@ -8,7 +8,7 @@ export const store = configureStore({
     reducer: {
         layout: layoutReducer,
         image: imageReducer,
-        newProject: projectReducer,
+        currentProject: projectReducer,
     },
 });
 

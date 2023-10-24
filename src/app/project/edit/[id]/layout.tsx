@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import Loader from "@/components/loader";
 import { setLayout } from "@/store/layoutSlice";
+import { useRouter } from "next/navigation";
+import { setCurrentProject } from "@/store/projectSlice";
 
 export default function NewLandingPageLayout({
     children,
@@ -39,6 +41,7 @@ export default function NewLandingPageLayout({
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const getProjectDetails = async (id: string) => {
         try {
@@ -49,9 +52,11 @@ export default function NewLandingPageLayout({
             setIsLoading(true);
 
             const response = await axios.get(`/api/project/${id}`);
-            dispatch(setLayout(response.data.json));
+            dispatch(setLayout(response.data.content));
+            dispatch(setCurrentProject(response.data));
         } catch (error) {
             console.log(error);
+            router.push("/dashboard");
         } finally {
             setIsLoading(false);
         }
@@ -89,7 +94,7 @@ export default function NewLandingPageLayout({
                     </div>
                 </TabsContent>
                 <TabsContent className="w-full" value="preview">
-                    <Preview />
+                    <Preview projectId={params.id} />
                 </TabsContent>
             </Tabs>
         </main>

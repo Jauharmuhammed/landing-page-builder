@@ -37,7 +37,6 @@ const ImageInput = ({ form, fieldname, label, placeholder, description, onChange
 
     useEffect(() => {
         if (navbarLogo && !imagePreview) {
-
             dispatch(
                 setImagePreview({
                     key: fieldname,

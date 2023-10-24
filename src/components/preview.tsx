@@ -5,13 +5,17 @@ import ProjectPage from "@/app/project/view/[id]/page";
 import React from "react";
 import { layoutReducer } from "../types/types";
 import { useSelector } from "react-redux";
+import { currentProjectStore } from "@/store/projectSlice";
 
-type Props = {};
+type Props = {
+    projectId: string;
+};
 
-const Preview = (props: Props) => {
+const Preview = ({ projectId }: Props) => {
     const data = useSelector((state: layoutReducer) => state.layout);
+
     return (
-        <ProjectLayout pageData={data}>
+        <ProjectLayout pageData={data} projectId={projectId}>
             <ProjectPage pageData={data} />
         </ProjectLayout>
     );

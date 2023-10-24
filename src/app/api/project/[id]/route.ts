@@ -20,6 +20,10 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
         const project = await db.select().from(projects).where(eq(projects.id, params.id));
 
+        if(project.length === 0) {
+            return new NextResponse("Project not found.", { status: 404 });
+        }
+
         return NextResponse.json(project[0], { status: 200 });
     } catch (error) {
         console.error(error);

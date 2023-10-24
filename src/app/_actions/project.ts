@@ -7,8 +7,9 @@ import * as z from "zod";
 import { getAuthSession } from "../api/auth/[...nextauth]/options";
 import { projects } from "@/lib/db/schema";
 import { db } from "@/lib/db";
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { pageData } from "@/types/types";
+import { user } from "../../../drizzle/schema";
 
 type NewProject = typeof projects.$inferInsert;
 
@@ -19,7 +20,7 @@ export async function addProjectsAction(value: z.infer<typeof newProjectFormSche
         id: uuidv4(),
         userId: session.user.id,
         title: value.title,
-        json: { styles: {}, elements: {} },
+        content: { styles: {}, elements: {} },
     };
 
     const newProjectId = await db
@@ -44,6 +45,18 @@ export async function updateProjectLayoutAction(id: string, layout: pageData) {
 
     await db
         .update(projects)
-        .set({ json: layout })
+        .set({ content: layout })
         .where(and(eq(projects.id, id), eq(projects.userId, session.user.id)));
+}
+
+export async function getProjectByUserAction() {
+    const session = await getAuthSession();
+    if (!session) return Error("Not logged in");
+
+    const projectList = await db
+        .select()
+        .from(projects)
+        .where(and(eq(projects.userId, session.user.id), eq(projects.isActive, true)))
+        .orderBy(desc(projects.updatedAt));
+    return projectList;
 }

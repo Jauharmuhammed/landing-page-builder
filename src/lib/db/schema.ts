@@ -58,8 +58,9 @@ export const projects = pgTable("project", {
         .notNull()
         .references(() => users.id, { onDelete: "cascade" }),
     title: text("title").notNull(),
-    json: json("json").notNull(),
+    content: json("content").notNull(),
     isActive: boolean("is_active").default(true),
+    isPublished: boolean("is_published").default(false),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
 });

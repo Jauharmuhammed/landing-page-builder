@@ -58,9 +58,9 @@ export default function NavbarForm() {
         try {
             const formData = new FormData();
             formData.append("file", image);
-            formData.append("upload_preset", "landing-page-builder");
+            formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
 
-            const uploadURL = `https://api.cloudinary.com/v1_1/dpofqivee/image/upload`;
+            const uploadURL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
 
             const response = await axios.post(uploadURL, formData).catch((err) => console.log(err));
             dispatch(updateNavbarLogo(response?.data?.secure_url));
@@ -98,7 +98,7 @@ export default function NavbarForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <LogoFields form={form} />
+                <LogoFields form={form} projectId={params.id as string} />
                 <ActionButtonFields form={form} />
                 <LinkFields form={form} />
                 <Button disabled={isLoading} type="submit">

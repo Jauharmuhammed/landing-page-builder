@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type ImageElementStore = {
-    image: ImageElement[];
-};
 
 type ImageElement = {
     key: string;
     url: string;
 
     filename: string;
+};
+
+export type ImageElementStore = {
+    image: ImageElement[];
 };
 
 const initialState: ImageElement[] = [];

@@ -56,10 +56,12 @@ const NewProjectForm = (props: Props) => {
     return (
         <Dialog>
             <DialogTrigger>
-                <Card className="aspect-video flex justify-center items-center gap-1 hover:bg-black/5 cursor-pointer">
-                    <Plus size={18} />
-                    <span>New</span>
-                </Card>
+                <div className="p-2 rounded-md cursor-pointer mb-auto h-full">
+                    <Card className="aspect-video flex justify-center items-center hover:bg-slate-300/10 ">
+                        <Plus size={18} />
+                    </Card>
+                    <h5 className="text-sm text-left mt-3 text-zinc-300"></h5>
+                </div>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
