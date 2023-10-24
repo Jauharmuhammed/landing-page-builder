@@ -43,7 +43,7 @@ export default function NavbarForm() {
     });
 
     const navbarLogo = useSelector((state: ImageElementStore) => {
-        const imageElement = state.image.find((element) => element.key === "logo");
+        const imageElement = state.image.find((element) => element.key === `logo-${params.id}`);
         return imageElement ? imageElement.url : null;
     });
 
@@ -81,6 +81,7 @@ export default function NavbarForm() {
                 url = await uploadImage(await getImageBlob(navbarLogo));
             }
 
+
             const newData = cloneDeep(data);
 
             newData.elements.navbar = newData.elements.navbar || {};
@@ -89,7 +90,7 @@ export default function NavbarForm() {
 
             await updateProjectLayoutAction(params.id as string, newData);
 
-            console.log(data);
+            console.log(newData);
         } catch (error) {
             console.log("[NAVBAR_LAYOUT_SAVE_ERROR]", error);
         }

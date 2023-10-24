@@ -19,7 +19,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   return (
     <nav
       className={cn(
-        "flex space-x-2 ms-3 lg:ms-0 lg:flex-col lg:space-x-0 lg:space-y-1",
+        "flex space-x-2 ms-3 w-full overflow-auto lg:ms-0 lg:flex-col lg:space-x-0 lg:space-y-1",
         className
       )}
       {...props}

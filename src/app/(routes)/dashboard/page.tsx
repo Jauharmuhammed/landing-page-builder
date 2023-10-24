@@ -11,7 +11,7 @@ const DashboardPage = async (props: Props) => {
     const projectList = await getProjectByUserAction();
     console.log(projectList);
     return (
-        <div className="grid grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-8 p-12">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-8 p-6">
             <NewProjectForm />
 
             {Array.isArray(projectList) &&

@@ -14,7 +14,7 @@ export default function ProjectLayout({ children, pageData, projectId }: propsTy
         pageData = data;
     }
     return (
-        <main>
+        <main className="p-2 md:px-12 border rounded-md h-full min-h-screen">
             <Navbar elements={pageData.elements.navbar} projectId={projectId!} />
             {children}
             <Footer elements={pageData.elements.footer} />

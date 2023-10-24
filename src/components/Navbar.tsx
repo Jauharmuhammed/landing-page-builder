@@ -12,7 +12,7 @@ type Props = {};
 const Navbar = (props: Props) => {
     const { resolvedTheme } = useTheme();
     return (
-        <header className="w-full py-6 px-12 flex justify-between items-center">
+        <header className="w-full py-4 md:py-6 flex justify-between items-center">
             <div className="flex space-x-4">
                 <Image
                     width={100}
@@ -25,7 +25,7 @@ const Navbar = (props: Props) => {
                     }
                     alt="Landerr logo"></Image>
             </div>
-            <ul className="flex space-x-16 items-center">
+            <ul className="hidden md:flex space-x-16 items-center">
                 <li>Home</li>
                 <li>About</li>
                 <li>Contact</li>
