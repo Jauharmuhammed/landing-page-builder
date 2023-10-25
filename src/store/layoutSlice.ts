@@ -176,17 +176,19 @@ const layoutSlice = createSlice({
                 state.elements.footer.section!.social &&
                 state.elements.footer.section!.social[index]
             ) {
-                state.elements.footer.section!.social[index].label = value;
+                state.elements.footer.section!.social[index].link = value;
             }
         },
         updateFooterSocialLinkAdd: (state) => {
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || { social: [] };
+            state.elements.footer.section.social = state.elements.footer.section.social || [];
             state.elements.footer.section.social?.push({ label: "", link: "" });
         },
         updateFooterSocialLinkRemove: (state, action: PayloadAction<number>) => {
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || { social: [] };
+            state.elements.footer.section.social = state.elements.footer.section.social || [];
             if (state.elements.footer.section.social?.[action.payload]) {
                 state.elements.footer.section.social?.splice(action.payload, 1);
             }
@@ -216,17 +218,19 @@ const layoutSlice = createSlice({
                 state.elements.footer.section!.services &&
                 state.elements.footer.section!.services[index]
             ) {
-                state.elements.footer.section!.services[index].label = value;
+                state.elements.footer.section!.services[index].link = value;
             }
         },
         updateFooterServicesLinkAdd: (state) => {
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || { services: [] };
+            state.elements.footer.section.services = state.elements.footer.section.services || [];
             state.elements.footer.section.services?.push({ label: "", link: "" });
         },
         updateFooterServicesLinkRemove: (state, action: PayloadAction<number>) => {
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || { services: [] };
+            state.elements.footer.section.services = state.elements.footer.section.services || [];
             if (state.elements.footer.section.services?.[action.payload]) {
                 state.elements.footer.section.services?.splice(action.payload, 1);
             }

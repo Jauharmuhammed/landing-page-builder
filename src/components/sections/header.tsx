@@ -18,7 +18,6 @@ const Header = ({ elements, projectId }: Props) => {
         );
         return imageElement ? imageElement.url : null;
     });
-    console.log(imagePreview);
     if (!elements) {
         return null;
     }

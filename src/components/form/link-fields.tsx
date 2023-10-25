@@ -44,7 +44,9 @@ const LinkFields = ({
     });
 
     useEffect(() => {
+        if (fieldName !== "link") return;
         valueArray?.forEach((links, index) => {
+            if (index > valueArray.length - 1) return;
             append({ label: links.label, link: links.link });
         });
         remove(valueArray?.length);
@@ -67,7 +69,7 @@ const LinkFields = ({
                 <div key={field.id} className="flex gap-4 items-center w-full">
                     <FormField
                         control={form.control}
-                        name={`links.${index}.label`}
+                        name={`${fieldName}.${index}.label`}
                         render={({ field }) => (
                             <FormItem className="flex-1">
                                 <FormLabel className={cn(index !== 0 && "sr-only")}>
@@ -93,7 +95,7 @@ const LinkFields = ({
                     />
                     <FormField
                         control={form.control}
-                        name={`links.${index}.link`}
+                        name={`${fieldName}.${index}.link`}
                         render={({ field }) => (
                             <FormItem className="flex-1">
                                 <FormLabel className={cn(index !== 0 && "sr-only")}>Link</FormLabel>
@@ -134,7 +136,7 @@ const LinkFields = ({
                 className="mt-2"
                 onClick={() => {
                     if (valueArray?.length === 5) {
-                        form.setError("links", { message: "Maximum of 5 links." });
+                        form.setError(fieldName, { message: "Maximum of 5 links." });
                         return;
                     }
                     append({ label: "", link: "" });

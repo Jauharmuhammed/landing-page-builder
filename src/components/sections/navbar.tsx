@@ -14,7 +14,6 @@ type Props = {
 };
 
 const Navbar = ({ elements, projectId }: Props) => {
-    console.log(projectId);
     const imagePreview = useSelector((state: ImageElementStore) => {
         const imageElement = state.image.find((element) => element.key === `logo-${projectId}`);
         return imageElement ? imageElement.url : null;
