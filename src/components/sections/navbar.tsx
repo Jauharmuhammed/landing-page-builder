@@ -19,7 +19,6 @@ const Navbar = ({ elements, projectId }: Props) => {
         const imageElement = state.image.find((element) => element.key === `logo-${projectId}`);
         return imageElement ? imageElement.url : null;
     });
-    console.log(imagePreview);
 
     if (!elements) {
         return null;

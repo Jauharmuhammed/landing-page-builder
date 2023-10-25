@@ -29,10 +29,10 @@ export default function NewLandingPageLayout({
             title: "Header",
             href: `/project/edit/${params.id}/header`,
         },
-        {
-            title: "Services",
-            href: `/project/edit/${params.id}/services`,
-        },
+        // {
+        //     title: "Services",
+        //     href: `/project/edit/${params.id}/services`,
+        // },
         {
             title: "Footer",
             href: `/project/edit/${params.id}/footer`,

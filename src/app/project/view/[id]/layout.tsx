@@ -17,7 +17,7 @@ export default function ProjectLayout({ children, pageData, projectId }: propsTy
         <main className="p-2 md:px-12">
             <Navbar elements={pageData.elements.navbar} projectId={projectId!} />
             {children}
-            <Footer elements={pageData.elements.footer} />
+            <Footer elements={pageData.elements.footer} projectId={projectId!}/>
         </main>
     );
 }
