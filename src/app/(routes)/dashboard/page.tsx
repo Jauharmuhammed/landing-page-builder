@@ -19,10 +19,14 @@ const DashboardPage = async (props: Props) => {
                 <NewProjectForm />
                 {Array.isArray(projectList) &&
                     projectList.map((project) => (
-                        <Card className="w-full aspect-video hover:bg-slate-300/10 rounded-md p-4 flex flex-col justify-between ">
+                        <Card
+                            key={project.id}
+                            className="w-full aspect-video hover:bg-slate-300/10 rounded-md p-4 flex flex-col justify-between ">
                             <div>
                                 <div className="flex justify-between items-center">
-                                    <h5 className="font-semibold w-full truncate">{project.title}</h5>
+                                    <h5 className="font-semibold w-full truncate">
+                                        {project.title}
+                                    </h5>
                                     {project.isPublished ? (
                                         <span className="px-2 py-1 rounded-sm text-xs bg-green-700 text-white">
                                             Live
@@ -38,10 +42,14 @@ const DashboardPage = async (props: Props) => {
                                 </p>
                             </div>
                             <div>
-                                <p className="text-zinc-400 dark:text-zinc-600 mb-2 text-sm w-full truncate">{project.description}</p>
+                                <p className="text-zinc-400 dark:text-zinc-600 mb-2 text-sm w-full truncate">
+                                    {project.description}
+                                </p>
                                 <div className="flex gap-2">
                                     {project.isPublished && (
-                                        <Link href={`/project/edit/${project.id}`} className="w-full">
+                                        <Link
+                                            href={`/project/edit/${project.id}`}
+                                            className="w-full">
                                             <Button className="w-full">
                                                 View &nbsp; <View size={16} />
                                             </Button>
