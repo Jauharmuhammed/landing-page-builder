@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Card } from "@/components/ui/card";
 import NewProjectForm from "@/components/new-project-form";
 import { getProjectByUserAction } from "@/app/_actions/project";
