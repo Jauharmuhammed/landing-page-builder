@@ -20,6 +20,7 @@ export async function addProjectsAction(value: z.infer<typeof newProjectFormSche
         id: uuidv4(),
         userId: session.user.id,
         title: value.title,
+        description: value.description,
         content: { styles: {}, elements: {} },
     };
 

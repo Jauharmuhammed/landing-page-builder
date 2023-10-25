@@ -54,8 +54,8 @@ const Header = ({ elements, projectId }: Props) => {
                     />
                 ) : (
                     <Image
-                        width={100}
-                        height={100}
+                        width={500}
+                        height={500}
                         className="w-full hover:scale-105 transition-transform duration-300 object-cover ease-in aspect-square"
                         src={elements.image!}
                         alt="header image"

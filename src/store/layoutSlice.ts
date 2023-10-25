@@ -101,25 +101,37 @@ const layoutSlice = createSlice({
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || {};
             state.elements.footer.section.main = state.elements.footer?.section?.main || {};
-            state.elements.footer.section.main.privacyAndPolicy = { label: action.payload };
+            state.elements.footer.section.main.privacyAndPolicy = {
+                label: action.payload,
+                link: state.elements.footer.section.main.privacyAndPolicy?.link,
+            };
         },
         updateFooterPrivacyAndPolicyLink: (state, action: PayloadAction<string>) => {
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || {};
             state.elements.footer.section.main = state.elements.footer?.section?.main || {};
-            state.elements.footer.section.main.privacyAndPolicy = { link: action.payload };
+            state.elements.footer.section.main.privacyAndPolicy = {
+                label: state.elements.footer.section.main.privacyAndPolicy?.label,
+                link: action.payload,
+            };
         },
         updateFooterCtaButtonLabel: (state, action: PayloadAction<string>) => {
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || {};
             state.elements.footer.section.main = state.elements.footer?.section?.main || {};
-            state.elements.footer.section.main.ctaButton = { label: action.payload };
+            state.elements.footer.section.main.ctaButton = {
+                label: action.payload,
+                link: state.elements.footer.section.main.ctaButton?.link,
+            };
         },
         updateFooterCtaButtonLink: (state, action: PayloadAction<string>) => {
             state.elements.footer = state.elements.footer || {};
             state.elements.footer.section = state.elements.footer.section || {};
             state.elements.footer.section.main = state.elements.footer?.section?.main || {};
-            state.elements.footer.section.main.ctaButton = { link: action.payload };
+            state.elements.footer.section.main.ctaButton = {
+                label: state.elements.footer.section.main.ctaButton?.label,
+                link: action.payload,
+            };
         },
         updateFooterMail: (state, action: PayloadAction<string>) => {
             state.elements.footer = state.elements.footer || {};
