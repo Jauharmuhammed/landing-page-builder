@@ -1,5 +1,7 @@
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
@@ -13,10 +15,10 @@ export const options: NextAuthOptions = {
         strategy: "jwt",
     },
     providers: [
-        // GitHubProvider({
-        //     clientId: process.env.GITHUB_ID as string,
-        //     clientSecret: process.env.GITHUB_SECRET as string,
-        // }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_ID as string,
+            clientSecret: process.env.GITHUB_SECRET as string,
+        }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
@@ -36,7 +38,7 @@ export const options: NextAuthOptions = {
         //         },
         //     },
         //     async authorize(credentials) {
-        //         const user = { id: 42, name: "jauhar", password: "nextauth" };
+        //         const user = { id: 200, name: "user", password: "password" };
 
         //         if (
         //             credentials?.username === user.name &&
@@ -52,7 +54,7 @@ export const options: NextAuthOptions = {
     theme: {
         colorScheme: "auto", // "auto" | "dark" | "light"
         brandColor: "", // Hex color code
-        logo: `${process.env.NEXTAUTH_URL}/images/landerr.svg`, // Absolute URL to image
+        logo: `${process.env.NEXTAUTH_URL}/images/landerr-text-mark-dark-theme.png`, // Absolute URL to image
         buttonText: "", // Hex color code
     },
     callbacks: {
@@ -63,7 +65,7 @@ export const options: NextAuthOptions = {
                 email: token.email,
                 name: token.name,
                 image: token.image as string,
-              };
+            };
             return session;
         },
         async jwt({ token, user }) {

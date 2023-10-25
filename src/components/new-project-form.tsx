@@ -36,7 +36,7 @@ export const newProjectFormSchema = z.object({
         .min(2, {
             message: "Title must be at least 2 characters.",
         })
-        .max(15, { message: "Title cannot be longer than 15 characters." }),
+        .max(30, { message: "Title cannot be longer than 30 characters." }),
     description: z.string().min(5, {
         message: "Title must be at least 2 characters.",
     }),
@@ -57,7 +57,7 @@ const NewProjectForm = (props: Props) => {
     return (
         <Dialog>
             <DialogTrigger>
-                <div className="p-2 rounded-md cursor-pointer mb-auto h-full">
+                <div className="rounded-md cursor-pointer mb-auto h-full">
                     <Card className="aspect-video flex justify-center items-center hover:bg-slate-300/10 ">
                         <Plus size={18} />
                     </Card>
