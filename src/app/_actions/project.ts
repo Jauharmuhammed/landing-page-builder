@@ -10,6 +10,7 @@ import { db } from "@/lib/db";
 import { and, desc, eq } from "drizzle-orm";
 import { pageData } from "@/types/types";
 import { user } from "../../../drizzle/schema";
+import { revalidatePath } from "next/cache";
 
 type NewProject = typeof projects.$inferInsert;
 
@@ -20,6 +21,7 @@ export async function addProjectsAction(value: z.infer<typeof newProjectFormSche
         id: uuidv4(),
         userId: session.user.id,
         title: value.title,
+        description: value.description,
         content: { styles: {}, elements: {} },
     };
 
@@ -27,7 +29,7 @@ export async function addProjectsAction(value: z.infer<typeof newProjectFormSche
         .insert(projects)
         .values(result_projects)
         .returning({ insertedId: projects.id });
-    // revalidatePath("/");
+    revalidatePath("/dashboard");
 
     return newProjectId[0].insertedId;
 }
@@ -45,7 +47,7 @@ export async function updateProjectLayoutAction(id: string, layout: pageData) {
 
     await db
         .update(projects)
-        .set({ content: layout })
+        .set({ content: layout, updatedAt: new Date() })
         .where(and(eq(projects.id, id), eq(projects.userId, session.user.id)));
 }
 

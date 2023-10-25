@@ -14,7 +14,6 @@ type Props = {
 };
 
 const Navbar = ({ elements, projectId }: Props) => {
-    console.log(projectId);
     const imagePreview = useSelector((state: ImageElementStore) => {
         const imageElement = state.image.find((element) => element.key === `logo-${projectId}`);
         return imageElement ? imageElement.url : null;
@@ -41,7 +40,15 @@ const Navbar = ({ elements, projectId }: Props) => {
                             src={imagePreview!}
                             alt="Landerr logo"
                         />
-                    ) : null}
+                    ) : (
+                        <Image
+                            width={100}
+                            height={100}
+                            className="h-5 md:h-6 w-fit"
+                            src={elements.logo?.src!}
+                            alt="Landerr logo"
+                        />
+                    )}
                 </div>
                 {elements.links && (
                     <ul className="hidden md:flex space-x-16 items-center">

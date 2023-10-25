@@ -24,7 +24,7 @@ const TextInput = ({ form, fieldname, label, placeholder, description, onChange 
             control={form.control}
             name={fieldname}
             render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                     <FormLabel>{label}</FormLabel>
                     <FormControl>
                         <Input

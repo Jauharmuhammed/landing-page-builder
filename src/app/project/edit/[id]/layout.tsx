@@ -12,6 +12,9 @@ import Loader from "@/components/loader";
 import { setLayout } from "@/store/layoutSlice";
 import { useRouter } from "next/navigation";
 import { setCurrentProject } from "@/store/projectSlice";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import Logo from "@/components/logo";
 
 export default function NewLandingPageLayout({
     children,
@@ -29,10 +32,10 @@ export default function NewLandingPageLayout({
             title: "Header",
             href: `/project/edit/${params.id}/header`,
         },
-        {
-            title: "Services",
-            href: `/project/edit/${params.id}/services`,
-        },
+        // {
+        //     title: "Services",
+        //     href: `/project/edit/${params.id}/services`,
+        // },
         {
             title: "Footer",
             href: `/project/edit/${params.id}/footer`,
@@ -72,12 +75,25 @@ export default function NewLandingPageLayout({
     return (
         <main className="w-full flex justify-center py-4 px-3 md:px-12 md:py-4">
             <Tabs defaultValue="edit" className="w-full flex flex-col items-center">
-                <TabsList className="grid md:w-[400px] grid-cols-2">
-                    <TabsTrigger value="edit">Edit</TabsTrigger>
-                    <TabsTrigger value="preview">Preview</TabsTrigger>
-                </TabsList>
+                <div className="w-full flex justify-between">
+                    <div className="hidden md:block">
+                        <Logo />
+                    </div>
+
+                    <TabsList className="grid md:w-[400px] grid-cols-2">
+                        <TabsTrigger value="edit">Edit</TabsTrigger>
+                        <TabsTrigger value="preview">Preview</TabsTrigger>
+                    </TabsList>
+                    
+                    <div className="flex space-x-6 items-center">
+                        <Link href="/dashboard">
+                            <Button variant={"outline"}>Dashboard</Button>
+                        </Link>
+                        <Button variant={"primary"}>Publish</Button>
+                    </div>
+                </div>
                 <TabsContent className="w-full" value="edit">
-                    <div className="space-y-6 p-2 md:p-10 pb-16">
+                    <div className="space-y-6 p-2 md:py-10 pb-16">
                         <div className="space-y-0.5">
                             <h2 className="text-2xl font-bold tracking-tight">Edit</h2>
                             <p className="text-muted-foreground">

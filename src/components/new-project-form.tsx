@@ -2,11 +2,9 @@
 
 import * as z from "zod";
 import React from "react";
-import { useSession } from "next-auth/react";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -26,9 +24,9 @@ import { Input } from "./ui/input";
 import { Card } from "./ui/card";
 import { Loader2, Plus } from "lucide-react";
 import { Button } from "./ui/button";
-import { db } from "@/lib/db";
 import { addProjectsAction } from "@/app/_actions/project";
 import { useRouter } from "next/navigation";
+import { Textarea } from "./ui/textarea";
 
 type Props = {};
 
@@ -38,11 +36,14 @@ export const newProjectFormSchema = z.object({
         .min(2, {
             message: "Title must be at least 2 characters.",
         })
-        .max(15, { message: "Title cannot be longer than 15 characters." }),
+        .max(30, { message: "Title cannot be longer than 30 characters." }),
+    description: z.string().min(5, {
+        message: "Title must be at least 2 characters.",
+    }),
 });
 
 const NewProjectForm = (props: Props) => {
-    const router = useRouter()
+    const router = useRouter();
     const form = useForm<z.infer<typeof newProjectFormSchema>>({
         resolver: zodResolver(newProjectFormSchema),
     });
@@ -51,12 +52,12 @@ const NewProjectForm = (props: Props) => {
 
     async function onSubmit(values: z.infer<typeof newProjectFormSchema>) {
         const newProjectId = await addProjectsAction(values);
-        router.push(`/project/edit/${newProjectId}`)
+        router.push(`/project/edit/${newProjectId}`);
     }
     return (
         <Dialog>
             <DialogTrigger>
-                <div className="p-2 rounded-md cursor-pointer mb-auto h-full">
+                <div className="rounded-md cursor-pointer mb-auto h-full">
                     <Card className="aspect-video flex justify-center items-center hover:bg-slate-300/10 ">
                         <Plus size={18} />
                     </Card>
@@ -85,6 +86,25 @@ const NewProjectForm = (props: Props) => {
                                             </FormControl>
                                             <FormDescription>
                                                 This will be the title of your project
+                                            </FormDescription>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name={"description"}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Description</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    {...field}
+                                                    placeholder={"Type your project title"}
+                                                />
+                                            </FormControl>
+                                            <FormDescription>
+                                                This will be the description of your project
                                             </FormDescription>
                                             <FormMessage />
                                         </FormItem>

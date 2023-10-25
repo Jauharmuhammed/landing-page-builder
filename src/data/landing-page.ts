@@ -52,21 +52,21 @@ export default {
             },
             section: [
                 {
-                    src: "/images/hero-image1.jpeg",
+                    src: "/animations/easy-to-use-loop.svg",
                     link: "/use",
                     title: "Easy to Use",
                     description: "No coding required. Our builder is user-friendly.",
                     label: "Learn More",
                 },
                 {
-                    src: "/images/hero-image2.jpeg",
+                    src: "/animations/customization-loop.svg",
                     link: "/Customization",
                     title: "Customization",
                     description: "Tailor landing pages to your brand's unique style.",
                     label: "Learn More",
                 },
                 {
-                    src: "/images/hero-image3.jpeg",
+                    src: "/animations/conversion-loop.svg",
                     link: "/use",
                     title: "Conversion Optimization",
                     description: "Boost your conversions with our tools.",
@@ -88,16 +88,16 @@ export default {
                         link: "/contact-support",
                         varient: "primary",
                     },
-                    copyright: "© 2023 Your Company. All rights reserved.",
+                    copyright: "© 2023 Landerr. All rights reserved.",
                     privacyAndPolicy: {
                         label: "Privacy Policy",
                         link: "/privacy-policy",
                     },
                 },
                 contact: {
-                    mail: "contact@yourcompany.com",
+                    mail: "contact@landerr.io",
                     phone: "+1 (123) 456-7890",
-                    address: "123 Main St, Your City, Country",
+                    address: "Sheikh Zayed Rd, Dubai, United Arab Emirates (UAE)",
                 },
                 social: [
                     {

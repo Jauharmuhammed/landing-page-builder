@@ -16,7 +16,7 @@ export type navbar = {
 };
 
 export type header = {
-    heading: string;
+    heading?: string;
     description?: string;
     ctaButton?: button;
     image?: string;
@@ -37,24 +37,24 @@ export type services = {
 };
 
 export type footer = {
-    logo: {
+    logo?: {
         src: string;
     };
-    section: {
-        main: {
-            title: string;
-            description: string;
-            ctaButton: button;
-            copyright: string;
-            privacyAndPolicy: link;
+    section?: {
+        main?: {
+            title?: string;
+            description?: string;
+            ctaButton?: button;
+            copyright?: string;
+            privacyAndPolicy?: link;
         };
-        contact: {
-            mail: string;
-            phone: string;
-            address: string;
+        contact?: {
+            mail?: string;
+            phone?: string;
+            address?: string;
         };
-        social: link[];
-        services: link[];
+        social?: link[];
+        services?: link[];
     };
 };
 

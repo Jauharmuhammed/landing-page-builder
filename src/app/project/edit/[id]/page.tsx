@@ -10,11 +10,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import LinkFields from "@/components/form/navbar/link-fields";
+import LinkFields from "@/components/form/link-fields";
 
 import { updateProjectLayoutAction } from "@/app/_actions/project";
 import { ImageElementStore } from "@/store/imageSlice";
-import { updateNavbarActionLabel, updateNavbarLogo } from "@/store/layoutSlice";
+import {
+    updateNavbarActionLabel,
+    updateNavbarLinkAdd,
+    updateNavbarLinkLabel,
+    updateNavbarLinkRemove,
+    updateNavbarLinkTo,
+    updateNavbarLogo,
+} from "@/store/layoutSlice";
 import { layoutReducer } from "@/types/types";
 
 import { Loader2 } from "lucide-react";
@@ -103,9 +110,9 @@ export default function NavbarForm() {
                 <ImageInput
                     form={form}
                     fieldname={`logo-${params.id}`}
-                    onChange={(value) => dispatch(updateNavbarActionLabel(value))}
                     label="Logo"
                     description="This will be the label for the action button on navbar."
+                    src={navbar?.logo?.src}
                 />
                 <TextInput
                     form={form}
@@ -115,7 +122,19 @@ export default function NavbarForm() {
                     placeholder="Sing in"
                     description="This will be the label for the action button on navbar."
                 />
-                <LinkFields form={form} />
+                <LinkFields
+                    form={form}
+                    valueArray={navbarLinks}
+                    label="Navigation"
+                    description="Add links to pages or sections to navigate."
+                    fieldName="link"
+                    labelOnChange={(value, index) =>
+                        dispatch(updateNavbarLinkLabel({ value, index }))
+                    }
+                    linkOnChange={(value, index) => dispatch(updateNavbarLinkTo({ value, index }))}
+                    removeFieldAction={(index) => dispatch(updateNavbarLinkRemove(index))}
+                    addFieldAction={() => dispatch(updateNavbarLinkAdd())}
+                />
                 <Button disabled={isLoading} type="submit">
                     {isLoading && (
                         <>
