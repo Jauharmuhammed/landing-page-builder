@@ -59,8 +59,8 @@ export const options: NextAuthOptions = {
     },
     callbacks: {
         async session({ session, token }) {
-            // do something to session
             session.user = {
+                // @ts-ignore
                 id: token.id,
                 email: token.email,
                 name: token.name,
