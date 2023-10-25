@@ -17,7 +17,7 @@ const Preview = ({ projectId }: Props) => {
     return (
         <div className="border rounded-md h-[90vh] overflow-y-auto">
             <ProjectLayout pageData={data} projectId={projectId}>
-                <ProjectPage pageData={data} />
+                <ProjectPage pageData={data} projectId={projectId}/>
             </ProjectLayout>
         </div>
     );

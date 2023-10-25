@@ -56,6 +56,32 @@ const layoutSlice = createSlice({
             state.elements.navbar.logo = state.elements.navbar.logo || { src: "" };
             state.elements.navbar.logo.src = action.payload;
         },
+
+        updateHeaderHeading: (state, action) => {
+            state.elements.header = state.elements.header || {};
+            state.elements.header.heading = action.payload;
+        },
+
+        updateHeaderDescription: (state, action) => {
+            state.elements.header = state.elements.header || {};
+            state.elements.header.description = action.payload;
+        },
+
+        updateHeaderImage: (state, action) => {
+            state.elements.header = state.elements.header || {};
+            state.elements.header.image = action.payload;
+        },
+
+        updateHeaderActionButtonLabel: (state, action) => {
+            state.elements.header = state.elements.header || {};
+            state.elements.header.ctaButton = state.elements.header.ctaButton || {};
+            state.elements.header.ctaButton.label = action.payload;
+        },
+        updateHeaderActionButtonLink: (state, action) => {
+            state.elements.header = state.elements.header || {};
+            state.elements.header.ctaButton = state.elements.header.ctaButton || {};
+            state.elements.header.ctaButton.link = action.payload;
+        },
     },
 });
 
@@ -67,6 +93,12 @@ export const {
     updateNavbarLinkAdd,
     updateNavbarLinkRemove,
     updateNavbarLogo,
+
+    updateHeaderHeading,
+    updateHeaderDescription,
+    updateHeaderImage,
+    updateHeaderActionButtonLabel,
+    updateHeaderActionButtonLink,
 } = layoutSlice.actions;
 
 export default layoutSlice.reducer;

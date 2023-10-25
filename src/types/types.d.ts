@@ -16,7 +16,7 @@ export type navbar = {
 };
 
 export type header = {
-    heading: string;
+    heading?: string;
     description?: string;
     ctaButton?: button;
     image?: string;

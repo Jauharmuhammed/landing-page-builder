@@ -103,9 +103,9 @@ export default function NavbarForm() {
                 <ImageInput
                     form={form}
                     fieldname={`logo-${params.id}`}
-                    onChange={(value) => dispatch(updateNavbarActionLabel(value))}
                     label="Logo"
                     description="This will be the label for the action button on navbar."
+                    src={navbar?.logo?.src}
                 />
                 <TextInput
                     form={form}

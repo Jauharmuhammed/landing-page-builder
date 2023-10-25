@@ -13,20 +13,18 @@ import Image from "next/image";
 import { ImageElementStore, setImagePreview } from "@/store/imageSlice";
 import { Plus, X } from "lucide-react";
 import { Button } from "../ui/button";
-import { layoutReducer } from "@/types/types";
+import { cn } from "@/lib/utils";
 
 type Props = {
     form: any;
     fieldname: string;
     label: string;
+    src: string | undefined;
     description: string;
-    onChange: (value: string) => void;
+    square?: boolean;
 };
 
-const ImageInput = ({ form, fieldname, label, description, onChange }: Props) => {
-    const navbarLogo = useSelector(
-        (state: layoutReducer) => state.layout.elements.navbar?.logo?.src
-    );
+const ImageInput = ({ form, fieldname, label, src, description, square = false }: Props) => {
     const imagePreview = useSelector((state: ImageElementStore) => {
         const imageElement = state.image.find((element) => element.key === fieldname);
         return imageElement ? imageElement.url : null;
@@ -35,11 +33,11 @@ const ImageInput = ({ form, fieldname, label, description, onChange }: Props) =>
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (navbarLogo && !imagePreview) {
+        if (src && !imagePreview) {
             dispatch(
                 setImagePreview({
                     key: fieldname,
-                    url: navbarLogo,
+                    url: src,
                     filename: "logo.png",
                 })
             );
@@ -47,7 +45,7 @@ const ImageInput = ({ form, fieldname, label, description, onChange }: Props) =>
     }, []);
 
     return (
-        <div className=" gap-4 h-full">
+        <div className="gap-4 h-full">
             <FormField
                 control={form.control}
                 name={fieldname}
@@ -56,7 +54,7 @@ const ImageInput = ({ form, fieldname, label, description, onChange }: Props) =>
                         <FormLabel>{label}</FormLabel>
                         <FormControl>
                             <Input
-                                id="logo-image"
+                                id="image"
                                 type="file"
                                 className="hidden"
                                 accept="image/*"
@@ -79,11 +77,18 @@ const ImageInput = ({ form, fieldname, label, description, onChange }: Props) =>
                 )}
             />
             {imagePreview ? (
-                <div className="px-4 py-2.5 my-auto border rounded-md h-28 mt-2 relative">
+                <div
+                    className={cn(
+                        "px-4 py-2.5 my-auto border rounded-md h-28 mt-2 relative",
+                        square && "p-0 rounded-3xl aspect-square w-full h-full"
+                    )}>
                     <Image
-                        width={100}
-                        height={100}
-                        className="m-auto h-full max-h-20 object-contain "
+                        width={square ? 500 : 100}
+                        height={square ? 500 : 100}
+                        className={cn(
+                            "m-auto h-full object-contain",
+                            square && "object-cover w-full rounded-3xl"
+                        )}
                         src={imagePreview}
                         alt="preview"
                     />
@@ -97,7 +102,7 @@ const ImageInput = ({ form, fieldname, label, description, onChange }: Props) =>
                 </div>
             ) : (
                 <label
-                    htmlFor="logo-image"
+                    htmlFor="image"
                     className="px-4 py-2.5 my-auto border rounded-md h-28 mt-2 flex justify-center items-center cursor-pointer">
                     <Plus size={20} />
                     <span className="text-sm">&nbsp; Add Logo</span>
