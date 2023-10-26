@@ -15,7 +15,7 @@ const Services = ({}: Props) => {
         <section className="space-y-6 py-12">
             <h2 className="text-5xl text-center">{header.title}</h2>
             <p className="text-center md:pb-12">{header.description}</p>
-            <div className="md:flex space-y-6 md:space-y-0 space-x-20">
+            <div className="md:flex space-y-6 md:space-y-0 md:space-x-20">
                 {section.map((element) => (
                     <div key={element.title} className="group">
                         <div

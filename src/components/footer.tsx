@@ -1,33 +1,22 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import landingPage from "@/data/landing-page";
-import { useTheme } from "next-themes";
 
 import { SiNextdotjs } from "react-icons/si";
+import Logo from "./logo";
 
 type Props = {};
 
 const Footer = ({}: Props) => {
     const elements = landingPage.elements.footer;
-    const { resolvedTheme } = useTheme();
 
     return (
         <footer id="footer" className="">
             <div className="my-12 md:mb-24">
-                <Image
-                    width={100}
-                    height={100}
-                    className="h-6 w-fit"
-                    src={
-                        resolvedTheme === "light"
-                            ? "/images/landerr-text-mark-light-theme.png"
-                            : "/images/landerr-text-mark-dark-theme.png"
-                    }
-                    alt="Landerr logo"></Image>
+                <Logo />
             </div>
             <div className="space-y-16 md:space-y-0 md:flex gap-8 mb-6">
                 {elements.section?.main && (
@@ -61,9 +50,24 @@ const Footer = ({}: Props) => {
                         {elements.section?.contact && (
                             <ul className="flex-1 space-y-6">
                                 <h4 className="text-lg font-bold">Contact Us</h4>
-                                <li className="underline">{elements.section?.contact?.mail}</li>
-                                <li>{elements.section?.contact?.phone}</li>
-                                <li>{elements.section?.contact?.address}</li>
+                                <li className=" flex space-x-3 items-center">
+                                    <Mail className="min-w-fit" size={16} />
+                                    <span className="underline text-sm cursor-pointer">
+                                        {elements.section?.contact?.mail}
+                                    </span>
+                                </li>
+                                <li className=" flex space-x-3 items-center">
+                                    <Phone className="min-w-fit" size={16} />
+                                    <span className="text-sm cursor-pointer">
+                                        {elements.section?.contact?.phone}
+                                    </span>
+                                </li>
+                                <li className=" flex space-x-3 items-center">
+                                    <MapPin className="min-w-fit" size={16} />
+                                    <span className="text-sm cursor-pointer">
+                                        {elements.section?.contact?.address}
+                                    </span>
+                                </li>
                             </ul>
                         )}
                     </>
@@ -73,7 +77,7 @@ const Footer = ({}: Props) => {
                         <ul className="flex-1 space-y-6">
                             <h4 className="text-lg font-bold">Services</h4>
                             {elements.section?.services?.map((service) => (
-                                <li key={service.label} className="">
+                                <li key={service.label} className="text-sm">
                                     {service.label}
                                 </li>
                             ))}
@@ -84,7 +88,7 @@ const Footer = ({}: Props) => {
                             <h4 className="text-lg font-bold">Social</h4>
                             {elements.section?.social?.map((social) => (
                                 <li key={social.label} className="flex items-center gap-2 group">
-                                    <span>{social.label}</span>
+                                    <span className="text-sm">{social.label}</span>
                                     <ArrowRight
                                         size={20}
                                         className="-rotate-45 text-slate-700 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"

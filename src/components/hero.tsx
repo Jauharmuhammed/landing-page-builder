@@ -23,7 +23,7 @@ const Hero = (props: Props) => {
                     Transform Visitors into Customers with Our Landing Page Builder
                 </h3>
                 {session?.user ? (
-                    <Link href={"/explore"}>
+                    <Link className="w-fit" href={"/explore"}>
                         <Button
                             variant={"primary"}
                             className="w-fit rounded-3xl mt-2 flex space-x-2 xl:p-8 group">
