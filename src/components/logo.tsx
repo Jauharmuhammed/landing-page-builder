@@ -15,7 +15,7 @@ const Logo = (props: Props) => {
             <Image
                 width={100}
                 height={100}
-                className="h-6 w-fit"
+                className="h-5 md:h-6 flex-1 object-contain"
                 src={
                     resolvedTheme === "light"
                         ? "/images/landerr-text-mark-light-theme.png"
