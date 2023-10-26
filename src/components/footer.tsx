@@ -15,7 +15,7 @@ const Footer = ({}: Props) => {
 
     return (
         <footer id="footer" className="">
-            <div className="my-12 md:mb-24">
+            <div className="my-12 md:mb-24 flex justify-start">
                 <Logo />
             </div>
             <div className="space-y-16 md:space-y-0 md:flex gap-8 mb-6">
@@ -48,7 +48,7 @@ const Footer = ({}: Props) => {
                             )}
                         </div>
                         {elements.section?.contact && (
-                            <ul className="flex-1 space-y-6">
+                            <ul className="flex-1 space-y-6 w-full">
                                 <h4 className="text-lg font-bold">Contact Us</h4>
                                 <li className=" flex space-x-3 items-center">
                                     <Mail className="min-w-fit" size={16} />
