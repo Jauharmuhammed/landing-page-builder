@@ -29,13 +29,14 @@
 </p>
 <br>
 
-Landerr is a powerful landing page builder application designed to convert visitors into loyal customers. You can create mulitple landing page using form, manage your landing pages in a editor with live preview. You can make it private as a draft or publish to show other user. You can share your beautiful landing page all around the world. [here.](https://landerr.vercel.app)
+Landerr is a powerful landing page builder application designed to convert visitors into loyal customers. You can create mulitple landing page using form, manage your landing pages in a editor with live preview. You can make it private as a draft or publish to show other user. You can share your beautiful landing page all around the world. You can view the deployed application [here.](https://landerr.vercel.app)
 
 - Protected Dashboard page with a list of existing landing pages with options to "Edit", "View", and "Delete".
 - Create a new landing page with a title, description.
 - Landing page editor to edit and modify you each projects.
 - Live preview in the editor to see the landing page's appearance.
 - Publish option that changes the status of the landing page to "Live" (Public).
+- Explore page with a list all the published projects with option to preview it.
 - Google and GitHub authentication using Next Auth.
 - Protected routes, making it accessible only to authenticated users.
 - State management using redux for handling landing pages and their components.
