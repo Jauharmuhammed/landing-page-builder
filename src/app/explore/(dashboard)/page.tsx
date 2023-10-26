@@ -11,7 +11,6 @@ type Props = {};
 
 const page = async (props: Props) => {
     const data = await getPublishedProjectAction();
-    console.log(data);
     return (
         <>
             <h2 className="mt-8 text-lg font-semibold">Explore</h2>
@@ -30,7 +29,7 @@ const page = async (props: Props) => {
                                         </h5>
                                     </div>
                                     <p className="text-zinc-500 text-xs">
-                                        Last edited {moment(item.project?.updatedAt).fromNow()}
+                                        Created {moment(item.project?.createdAt).fromNow()}
                                     </p>
                                 </div>
                                 <div>

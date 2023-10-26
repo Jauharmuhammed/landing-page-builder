@@ -18,9 +18,7 @@ const Header = ({ elements, projectId }: Props) => {
         );
         return imageElement ? imageElement.url : null;
     });
-    if (!elements) {
-        return null;
-    }
+
     return (
         <section className="w-full flex flex-col md:flex-row pb-12 gap-4 md:gap-12">
             <div className="md:w-1/2 pt-12 md:pt-1 xl:py-12 flex flex-col justify-center space-y-6 md:space-y-8 xl:space-y-12">
@@ -56,7 +54,7 @@ const Header = ({ elements, projectId }: Props) => {
                         width={500}
                         height={500}
                         className="w-full hover:scale-105 transition-transform duration-300 object-cover ease-in aspect-square"
-                        src={elements.image!}
+                        src={elements?.image!}
                         alt="header image"
                     />
                 )}

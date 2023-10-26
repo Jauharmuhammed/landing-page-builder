@@ -7,6 +7,7 @@ import { navbar } from "@/types/types";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { ModeToggle } from "../mode-toggle";
 
 type Props = {
     elements?: navbar;
@@ -18,10 +19,6 @@ const Navbar = ({ elements, projectId }: Props) => {
         const imageElement = state.image.find((element) => element.key === `logo-${projectId}`);
         return imageElement ? imageElement.url : null;
     });
-
-    if (!elements) {
-        return null;
-    }
 
     return (
         <nav className="w-full py-3 md:py-7 flex justify-between items-center relative">
@@ -36,7 +33,7 @@ const Navbar = ({ elements, projectId }: Props) => {
                         <Image
                             width={100}
                             height={100}
-                            className="h-5 md:h-6 w-fit"
+                            className="h-5 md:h-6 w-full"
                             src={imagePreview!}
                             alt="Landerr logo"
                         />
@@ -44,13 +41,13 @@ const Navbar = ({ elements, projectId }: Props) => {
                         <Image
                             width={100}
                             height={100}
-                            className="h-5 md:h-6 w-fit"
-                            src={elements.logo?.src!}
+                            className="h-5 md:h-6 w-full"
+                            src={elements?.logo?.src!}
                             alt="Landerr logo"
                         />
                     )}
                 </div>
-                {elements.links && (
+                {elements?.links && (
                     <ul className="hidden md:flex space-x-16 items-center">
                         {elements.links.map((link) => (
                             <li key={link.label}>{link.label}</li>
@@ -58,7 +55,7 @@ const Navbar = ({ elements, projectId }: Props) => {
                     </ul>
                 )}
                 <SheetContent side={"left"} className="md:hidden ">
-                    {elements.links && (
+                    {elements?.links && (
                         <ul className="flex-col space-y-2 items-center mt-16">
                             {elements.links.map((link) => (
                                 <li
@@ -70,15 +67,14 @@ const Navbar = ({ elements, projectId }: Props) => {
                         </ul>
                     )}
                 </SheetContent>
-                {elements.actions && (
-                    <div className="flex space-x-4">
-                        {elements.actions.map((action) => (
-                            <Button className="rounded-full" key={action.label}>
-                                {action.label}
-                            </Button>
-                        ))}
-                    </div>
-                )}
+                <div className="flex space-x-4">
+                    <ModeToggle rounded/>
+                    {elements?.actions?.map((action) => (
+                        <Button className="rounded-full" key={action.label}>
+                            {action.label}
+                        </Button>
+                    ))}
+                </div>
             </Sheet>
         </nav>
     );
