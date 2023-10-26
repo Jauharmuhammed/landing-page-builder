@@ -53,9 +53,9 @@ export const options: NextAuthOptions = {
     ],
     theme: {
         colorScheme: "auto", // "auto" | "dark" | "light"
-        brandColor: "", // Hex color code
+        brandColor: "#1d4ed8", // Hex color code
         logo: `${process.env.NEXTAUTH_URL}/images/landerr-text-mark-dark-theme.png`, // Absolute URL to image
-        buttonText: "", // Hex color code
+        buttonText: "#fff", // Hex color code
     },
     callbacks: {
         async session({ session, token }) {
