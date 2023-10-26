@@ -5,7 +5,7 @@ import { SidebarNav } from "@/components/sidebar-nav";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
 import Loader from "@/components/loader";
@@ -15,6 +15,11 @@ import { setCurrentProject } from "@/store/projectSlice";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/logo";
+import UserMenu from "@/components/user-menu";
+import { project, projectReducer } from "@/types/types";
+import { updateProjectPublishAction } from "@/app/_actions/project";
+import { Loader2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function NewLandingPageLayout({
     children,
@@ -42,7 +47,11 @@ export default function NewLandingPageLayout({
         },
     ];
 
+    const { toast } = useToast();
+    const [project, setproject] = useState<project>();
+
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isPublishing, setIsPublishing] = useState<boolean>(false);
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -57,6 +66,7 @@ export default function NewLandingPageLayout({
             const response = await axios.get(`/api/project/${id}`);
             dispatch(setLayout(response.data.content));
             dispatch(setCurrentProject(response.data));
+            setproject(response.data);
         } catch (error) {
             console.log(error);
             router.push("/dashboard");
@@ -67,6 +77,29 @@ export default function NewLandingPageLayout({
     useEffect(() => {
         getProjectDetails(params.id);
     }, [params.id]);
+
+    const handlePublish = async () => {
+        try {
+            if (!project) return;
+            setIsPublishing(true);
+            const res = await updateProjectPublishAction(params.id, !project.isPublished);
+            dispatch(setCurrentProject(res));
+            const proj = res as project;
+            setproject(proj);
+            if (proj.isPublished) {
+                toast({ title: "Project Published Successfully!" });
+            } else {
+                toast({
+                    title: "Project Unpublished Successfully!",
+                    description: "Keep your project alive, showcase yourself",
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsPublishing(false);
+        }
+    };
 
     if (isLoading) {
         return <Loader fill />;
@@ -84,12 +117,21 @@ export default function NewLandingPageLayout({
                         <TabsTrigger value="edit">Edit</TabsTrigger>
                         <TabsTrigger value="preview">Preview</TabsTrigger>
                     </TabsList>
-                    
-                    <div className="flex space-x-6 items-center">
-                        <Link href="/dashboard">
-                            <Button variant={"outline"}>Dashboard</Button>
-                        </Link>
-                        <Button variant={"primary"}>Publish</Button>
+
+                    <div className="flex space-x-6 items-center w-fit">
+                        <Button
+                            onClick={handlePublish}
+                            className="flex items-center"
+                            variant={project?.isPublished ? "destructive" : "primary"}>
+                            {isPublishing && (
+                                <>
+                                    <Loader2 size={16} className="animate-spin" />
+                                    &nbsp;
+                                </>
+                            )}
+                            <span>{project?.isPublished ? "Unpublish" : "Publish"}</span>
+                        </Button>
+                        <UserMenu />
                     </div>
                 </div>
                 <TabsContent className="w-full" value="edit">

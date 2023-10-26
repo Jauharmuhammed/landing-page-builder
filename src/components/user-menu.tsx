@@ -20,13 +20,13 @@ import Link from "next/link";
 import { LogOut } from "lucide-react";
 import { User } from "next-auth";
 import { useTheme } from "next-themes";
+import { useSession } from "next-auth/react";
 
-type Props = {
-    user: User;
-};
+type Props = {};
 
-const UserMenu = ({ user }: Props) => {
+const UserMenu = ({}: Props) => {
     const { setTheme, theme } = useTheme();
+    const { data: session } = useSession();
     return (
         <Menubar className="border-0 p-0">
             <MenubarMenu>
@@ -34,11 +34,17 @@ const UserMenu = ({ user }: Props) => {
                     <UserAvatar />
                 </MenubarTrigger>
                 <MenubarContent side="bottom" align="end">
-                    <MenubarItem disabled className="flex flex-col items-start pb-4 pr-4">
-                        <div className="">{user.name}</div>
-                        <div className="text-xs text-zinc-500 dark:text-zinc-500">{user.email}</div>
-                    </MenubarItem>
-                    <MenubarSeparator />
+                    {session?.user && (
+                        <>
+                            <MenubarItem disabled className="flex flex-col items-start pb-4 pr-4">
+                                <div className="">{session?.user.name}</div>
+                                <div className="text-xs text-zinc-500 dark:text-zinc-500">
+                                    {session?.user.email}
+                                </div>
+                            </MenubarItem>
+                            <MenubarSeparator />
+                        </>
+                    )}
                     <MenubarItem>
                         <Link href="/">Home</Link>
                     </MenubarItem>
@@ -46,7 +52,7 @@ const UserMenu = ({ user }: Props) => {
                         <Link href="/dashboard">Dashboard</Link>
                     </MenubarItem>
                     <MenubarItem>
-                        <Link href="/expore">Explore</Link>
+                        <Link href="/explore">Explore</Link>
                     </MenubarItem>
                     <MenubarSeparator />
                     <MenubarSub>
@@ -66,12 +72,14 @@ const UserMenu = ({ user }: Props) => {
                         </MenubarSubContent>
                     </MenubarSub>
                     <MenubarSeparator />
-                    <MenubarItem>
-                        <Link href="/api/auth/signout">Sign Out</Link>
-                        <MenubarShortcut>
-                            <LogOut size={16} />
-                        </MenubarShortcut>
-                    </MenubarItem>
+                    {session?.user && (
+                        <MenubarItem>
+                            <Link href="/api/auth/signout">Sign Out</Link>
+                            <MenubarShortcut>
+                                <LogOut size={16} />
+                            </MenubarShortcut>
+                        </MenubarItem>
+                    )}
                 </MenubarContent>
             </MenubarMenu>
         </Menubar>

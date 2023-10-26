@@ -11,9 +11,12 @@ const initialState: currentProject = {
     id: "",
     userId: "",
     title: "",
+    description: "",
     content: {},
-    isActive: true,
-    isPublished: false,
+    isActive: null,
+    isPublished: null,
+    createdAt: null,
+    updatedAt: null,
 };
 
 const projectSlice = createSlice({

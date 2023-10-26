@@ -14,22 +14,18 @@ type Props = {};
 const Navbar = (props: Props) => {
     const { data: session } = useSession();
     const pathname = usePathname();
-    console.log(session);
     return (
         <header className="w-full py-4 md:py-6 flex justify-between items-center">
             <Logo />
             <div className="flex space-x-4">
                 {session?.user ? (
                     <>
-                        <Link href="/api/auth/signout">
-                            <Button variant={"outline"}>Sign Out</Button>
-                        </Link>
                         {pathname !== "/dashboard" && (
                             <Link href="/dashboard">
                                 <Button variant={"primary"}>Dashboard</Button>
                             </Link>
                         )}
-                        <UserMenu user={session.user} />
+                        <UserMenu />
                     </>
                 ) : (
                     <>
