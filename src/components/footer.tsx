@@ -23,12 +23,12 @@ const Footer = ({}: Props) => {
                     <>
                         <div className="flex-[3_3_0%] flex flex-col space-y-6 md:space-y-8">
                             {elements.section?.main?.title && (
-                                <h3 className="text-3xl md:text-4xl lg:text-5xl w-4/5">
+                                <h3 className="text-2xl w-2/3 md:text-4xl lg:text-5xl md:w-4/5">
                                     {elements.section.main.title}
                                 </h3>
                             )}
                             {elements.section?.main?.description && (
-                                <p className="">{elements.section?.main?.description}</p>
+                                <p className="text-sm md:text-base">{elements.section?.main?.description}</p>
                             )}
                             {elements.section?.main?.ctaButton?.label && (
                                 <Button
@@ -48,7 +48,7 @@ const Footer = ({}: Props) => {
                             )}
                         </div>
                         {elements.section?.contact && (
-                            <ul className="md:flex-1 space-y-6">
+                            <ul className="md:flex-1 space-y-3 md:space-y-6">
                                 <h4 className="text-lg font-bold">Contact Us</h4>
                                 <li className="flex space-x-3 items-center">
                                     <Mail className="min-w-[1rem]" size={16} />
@@ -74,7 +74,7 @@ const Footer = ({}: Props) => {
                 )}
                 <div className="flex md:flex-[2_2_0%] gap-8">
                     {elements.section?.services && (
-                        <ul className="flex-1 space-y-6">
+                        <ul className="flex-1 space-y-3 md:space-y-6">
                             <h4 className="text-lg font-bold">Services</h4>
                             {elements.section?.services?.map((service) => (
                                 <li key={service.label} className="text-sm">
@@ -84,7 +84,7 @@ const Footer = ({}: Props) => {
                         </ul>
                     )}
                     {elements.section?.social && (
-                        <ul className="flex-1 space-y-6">
+                        <ul className="flex-1 space-y-3 md:space-y-6">
                             <h4 className="text-lg font-bold">Social</h4>
                             {elements.section?.social?.map((social) => (
                                 <li key={social.label} className="flex items-center gap-2 group">

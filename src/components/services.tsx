@@ -12,15 +12,15 @@ type Props = {};
 const Services = ({}: Props) => {
     const { header, section } = landingPage.elements.services;
     return (
-        <section className="space-y-6 py-12">
-            <h2 className="text-5xl text-center">{header.title}</h2>
-            <p className="text-center md:pb-12">{header.description}</p>
+        <section className="space-y-2 md:space-y-6 py-12">
+            <h2 className="text-2xl md:text-5xl text-center">{header.title}</h2>
+            <p className="text-center text-sm md:text-base text-zinc-600 dark:text-zinc-400 md:pb-12">{header.description}</p>
             <div className="md:flex space-y-6 md:space-y-0 md:space-x-20">
                 {section.map((element) => (
                     <div key={element.title} className="group">
                         <div
                             key={element.title}
-                            className="rounded-3xl flex-1 w-full aspect-square flex">
+                            className="rounded-3xl flex-1 w-full aspect-square flex mt-28 md:mt-0">
                             <Image
                                 width={500}
                                 height={500}
