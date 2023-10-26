@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import AuthProvider from "@/context/auth-provider";
 import TopLoadingBar from "@/components/top-loading-bar";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <body className={inter.className}>
                 <AuthProvider>
                     <TopLoadingBar />
+                    <Toaster />
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="system"

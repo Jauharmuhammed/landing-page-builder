@@ -75,8 +75,20 @@ export type layoutReducer = {
     layout: pageData;
 };
 
+export type project = {
+    id: string;
+    userId: string;
+    title: string;
+    description: string | null;
+    content: unknown;
+    isActive: boolean | null;
+    isPublished: boolean | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+
 export type projectReducer = {
-    newProject: string;
+    currentProject: project;
 };
 
 export interface NavItem {

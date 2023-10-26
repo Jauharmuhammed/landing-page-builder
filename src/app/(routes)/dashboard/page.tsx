@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import moment from "moment";
 import { Button } from "@/components/ui/button";
-import { PenSquare, View } from "lucide-react";
+import { Fullscreen, PenSquare, View } from "lucide-react";
 
 type Props = {};
 
@@ -24,7 +24,7 @@ const DashboardPage = async (props: Props) => {
                             className="w-full aspect-video hover:bg-slate-300/10 rounded-md p-4 flex flex-col justify-between ">
                             <div>
                                 <div className="flex justify-between items-center">
-                                    <h5 className="font-semibold w-full truncate">
+                                    <h5 className="font-semibold w-full truncate mr-2">
                                         {project.title}
                                     </h5>
                                     {project.isPublished ? (
@@ -45,18 +45,18 @@ const DashboardPage = async (props: Props) => {
                                 <p className="text-zinc-400 dark:text-zinc-600 mb-2 text-sm w-full truncate">
                                     {project.description}
                                 </p>
-                                <div className="flex gap-2">
+                                <div className="flex gap-2 text-sm">
                                     {project.isPublished && (
                                         <Link
-                                            href={`/project/edit/${project.id}`}
+                                            href={`/explore/${project.id}`}
                                             className="w-full">
                                             <Button className="w-full">
-                                                View &nbsp; <View size={16} />
+                                                View &nbsp; <Fullscreen size={16} />
                                             </Button>
                                         </Link>
                                     )}
                                     <Link href={`/project/edit/${project.id}`} className="w-full">
-                                        <Button className="w-full">
+                                        <Button variant={"primary"} className="w-full">
                                             Edit &nbsp; <PenSquare size={16} />
                                         </Button>
                                     </Link>

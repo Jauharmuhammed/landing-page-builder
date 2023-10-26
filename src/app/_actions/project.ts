@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { newProjectFormSchema } from "@/components/new-project-form";
 import * as z from "zod";
 import { getAuthSession } from "../api/auth/[...nextauth]/options";
-import { projects } from "@/lib/db/schema";
+import { projects, users } from "@/lib/db/schema";
 import { db } from "@/lib/db";
 import { and, desc, eq } from "drizzle-orm";
 import { pageData } from "@/types/types";
@@ -51,6 +51,18 @@ export async function updateProjectLayoutAction(id: string, layout: pageData) {
         .where(and(eq(projects.id, id), eq(projects.userId, session.user.id)));
 }
 
+export async function updateProjectPublishAction(id: string, isPublished: boolean) {
+    const session = await getAuthSession();
+    if (!session) return Error("Not logged in");
+
+    const project = await db
+        .update(projects)
+        .set({ isPublished: isPublished, updatedAt: new Date() })
+        .where(and(eq(projects.id, id), eq(projects.userId, session.user.id)))
+        .returning();
+    return project[0];
+}
+
 export async function getProjectByUserAction() {
     const session = await getAuthSession();
     if (!session) return Error("Not logged in");
@@ -61,4 +73,28 @@ export async function getProjectByUserAction() {
         .where(and(eq(projects.userId, session.user.id), eq(projects.isActive, true)))
         .orderBy(desc(projects.updatedAt));
     return projectList;
+}
+
+export async function getPublishedProjectAction() {
+    const session = await getAuthSession();
+    if (!session) return Error("Not logged in");
+
+    const projectList = await db
+        .select()
+        .from(projects)
+        .innerJoin(users, eq(users.id, projects.userId))
+        .where(and(eq(projects.isPublished, true), eq(projects.isActive, true)))
+        .orderBy(desc(projects.updatedAt));
+    return projectList;
+}
+
+export async function getSingleProjectAction(id: string) {
+    const projectList = await db
+        .select()
+        .from(projects)
+        .where(
+            and(eq(projects.id, id), eq(projects.isPublished, true), eq(projects.isActive, true))
+        );
+
+    return projectList[0];
 }

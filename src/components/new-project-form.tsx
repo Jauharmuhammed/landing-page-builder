@@ -37,9 +37,12 @@ export const newProjectFormSchema = z.object({
             message: "Title must be at least 2 characters.",
         })
         .max(30, { message: "Title cannot be longer than 30 characters." }),
-    description: z.string().min(5, {
-        message: "Title must be at least 2 characters.",
-    }),
+    description: z
+        .string()
+        .min(5, {
+            message: "Title must be at least 2 characters.",
+        })
+        .optional(),
 });
 
 const NewProjectForm = (props: Props) => {
