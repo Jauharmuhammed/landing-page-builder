@@ -97,7 +97,7 @@ export default {
                 contact: {
                     mail: "contact@landerr.io",
                     phone: "+1 (123) 456-7890",
-                    address: "Sheikh Zayed Rd, Dubai, United Arab Emirates (UAE)",
+                    address: "Sheikh Zayed Rd, Dubai, United Arab Emirates.",
                 },
                 social: [
                     {

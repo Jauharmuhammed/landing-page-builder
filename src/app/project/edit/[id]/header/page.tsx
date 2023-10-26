@@ -80,7 +80,7 @@ export default function NavbarForm() {
 
     async function onSubmit() {
         try {
-            if (!heroImage && !header?.image) {
+            if (!heroImage) {
                 form.setError("heroImage", { message: "Image is required" });
             }
 

@@ -46,7 +46,6 @@ const LinkFields = ({
     useEffect(() => {
         if (fieldName !== "link") return;
         valueArray?.forEach((links, index) => {
-            if (index > valueArray.length - 1) return;
             append({ label: links.label, link: links.link });
         });
         remove(valueArray?.length);

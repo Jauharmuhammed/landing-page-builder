@@ -42,9 +42,11 @@ export default function NavbarForm() {
     type formSchemaValues = z.infer<typeof navbarFromSchema>;
 
     const defaultValues: Partial<formSchemaValues> = {
-        links: navbarLinks.map((link) => ({ label: link.label || "", link: link.link || "" })),
+        links: navbar?.links?.map((link) => ({ label: link.label || "", link: link.link || "" })),
         navbarLabel: navbar?.actions?.[0]?.label || "",
     };
+
+    console.log(defaultValues)
 
     const form = useForm<z.infer<typeof navbarFromSchema>>({
         resolver: zodResolver(navbarFromSchema),
@@ -81,7 +83,7 @@ export default function NavbarForm() {
 
     async function onSubmit(values: z.infer<typeof navbarFromSchema>) {
         try {
-            if (!navbarLogo && !data.elements.navbar?.logo?.src) {
+            if (!navbarLogo) {
                 form.setError("logo", { message: "Image is required" });
             }
 
