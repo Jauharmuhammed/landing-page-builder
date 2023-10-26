@@ -1,7 +1,6 @@
 {
     "git": {
       "deploymentEnabled": {
-        "dev": false,
         "edge-runtime": false,
         "db": false,
         "auth": false,
