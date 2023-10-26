@@ -18,8 +18,8 @@ const page = async (props: Props) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 py-12 w-full">
                 {Array.isArray(data) &&
-                    data.map((item) => (
-                        <div className="flex flex-col space-y-2">
+                    data.map((item, index) => (
+                        <div key={index} className="flex flex-col space-y-2">
                             <Card
                                 key={item.project?.id}
                                 className="w-full aspect-video hover:bg-slate-300/10 rounded-md p-4 flex flex-col justify-between ">
