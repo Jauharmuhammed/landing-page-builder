@@ -48,22 +48,22 @@ const Footer = ({}: Props) => {
                             )}
                         </div>
                         {elements.section?.contact && (
-                            <ul className="flex-1 space-y-6 w-full">
+                            <ul className="md:flex-1 space-y-6">
                                 <h4 className="text-lg font-bold">Contact Us</h4>
-                                <li className=" flex space-x-3 items-center">
-                                    <Mail className="min-w-fit" size={16} />
+                                <li className="flex space-x-3 items-center">
+                                    <Mail className="min-w-[1rem]" size={16} />
                                     <span className="underline text-sm cursor-pointer">
                                         {elements.section?.contact?.mail}
                                     </span>
                                 </li>
                                 <li className=" flex space-x-3 items-center">
-                                    <Phone className="min-w-fit" size={16} />
+                                    <Phone className="min-w-[1rem]" size={16} />
                                     <span className="text-sm cursor-pointer">
                                         {elements.section?.contact?.phone}
                                     </span>
                                 </li>
                                 <li className=" flex space-x-3 items-center">
-                                    <MapPin className="min-w-fit" size={16} />
+                                    <MapPin className="min-w-[1rem]" size={16} />
                                     <span className="text-sm cursor-pointer">
                                         {elements.section?.contact?.address}
                                     </span>
