@@ -20,6 +20,7 @@ import {
     updateFooterCtaButtonLabel,
     updateFooterCtaButtonLink,
     updateFooterDescription,
+    updateFooterLogo,
     updateFooterMail,
     updateFooterPhone,
     updateFooterPrivacyAndPolicyLabel,
@@ -33,7 +34,6 @@ import {
     updateFooterSocialLinkRemove,
     updateFooterSocialLinkTo,
     updateFooterTitle,
-    updateNavbarLogo,
 } from "@/store/layoutSlice";
 import { layoutReducer } from "@/types/types";
 
@@ -80,12 +80,14 @@ export default function NavbarForm() {
         },
     };
 
+    console.log(defaultValues);
+
     const form = useForm<z.infer<typeof footerFromSchema>>({
         resolver: zodResolver(footerFromSchema),
         defaultValues,
     });
 
-    const navbarLogo = useSelector((state: ImageElementStore) => {
+    const footerLogo = useSelector((state: ImageElementStore) => {
         const imageElement = state.image.find(
             (element) => element.key === `footer-logo-${params.id}`
         );
@@ -108,7 +110,7 @@ export default function NavbarForm() {
             const uploadURL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
 
             const response = await axios.post(uploadURL, formData).catch((err) => console.log(err));
-            dispatch(updateNavbarLogo(response?.data?.secure_url));
+            dispatch(updateFooterLogo(response?.data?.secure_url));
             return response?.data?.secure_url;
         } catch (error) {
             console.log("[IMAGE_UPLOAD_ERROR]", error);
@@ -117,13 +119,13 @@ export default function NavbarForm() {
 
     async function onSubmit(values: z.infer<typeof footerFromSchema>) {
         try {
-            if (!navbarLogo && !data.elements.navbar?.logo?.src) {
+            if (!footerLogo) {
                 form.setError("logo", { message: "Image is required" });
             }
 
             let url;
-            if (navbarLogo) {
-                url = await uploadImage(await getImageBlob(navbarLogo));
+            if (footerLogo) {
+                url = await uploadImage(await getImageBlob(footerLogo));
             }
 
             const newData = cloneDeep(data);

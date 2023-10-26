@@ -43,13 +43,13 @@ const LinkFields = ({
         control: form.control,
     });
 
-    // useEffect(() => {
-    //     if (fieldName !== "link") return;
-    //     valueArray?.forEach((links, index) => {
-    //         append({ label: links.label, link: links.link });
-    //     });
-    //     remove(valueArray?.length);
-    // }, []);
+    useEffect(() => {
+        if (fieldName !== "link") return;
+        valueArray?.forEach((links, index) => {
+            append({ label: links.label, link: links.link });
+        });
+        remove(valueArray?.length);
+    }, []);
 
     return (
         <div>

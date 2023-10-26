@@ -37,15 +37,15 @@ const Navbar = ({ elements, projectId }: Props) => {
                             src={imagePreview!}
                             alt="Landerr logo"
                         />
-                    ) : (
+                    ) : elements?.logo?.src ? (
                         <Image
                             width={100}
                             height={100}
                             className="h-5 md:h-6 w-full"
-                            src={elements?.logo?.src!}
+                            src={elements?.logo?.src}
                             alt="Landerr logo"
                         />
-                    )}
+                    ) : null}
                 </div>
                 {elements?.links && (
                     <ul className="hidden md:flex space-x-16 items-center">
@@ -68,7 +68,7 @@ const Navbar = ({ elements, projectId }: Props) => {
                     )}
                 </SheetContent>
                 <div className="flex space-x-4">
-                    <ModeToggle rounded/>
+                    <ModeToggle rounded />
                     {elements?.actions?.map((action) => (
                         <Button className="rounded-full" key={action.label}>
                             {action.label}

@@ -49,15 +49,15 @@ const Header = ({ elements, projectId }: Props) => {
                         src={imagePreview!}
                         alt="Header Image"
                     />
-                ) : (
+                ) : elements?.image ? (
                     <Image
                         width={500}
                         height={500}
                         className="w-full hover:scale-105 transition-transform duration-300 object-cover ease-in aspect-square"
-                        src={elements?.image!}
+                        src={elements?.image}
                         alt="header image"
                     />
-                )}
+                ) : null}
             </div>
         </section>
     );
