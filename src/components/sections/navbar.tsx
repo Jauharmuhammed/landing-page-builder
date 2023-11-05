@@ -33,7 +33,7 @@ const Navbar = ({ elements, projectId }: Props) => {
                         <Image
                             width={100}
                             height={100}
-                            className="h-5 md:h-6 w-full"
+                            className="h-5 md:h-6 w-fit"
                             src={imagePreview!}
                             alt="Landerr logo"
                         />
@@ -41,7 +41,7 @@ const Navbar = ({ elements, projectId }: Props) => {
                         <Image
                             width={100}
                             height={100}
-                            className="h-5 md:h-6 w-full"
+                            className="h-5 md:h-6 w-fit"
                             src={elements?.logo?.src}
                             alt="Landerr logo"
                         />
